@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Returns the transpose of a matrix."""
+
+
 def matrix_transpose(matrix):
     """Returns the transpose of a matrix."""
     transpose = list(zip(*matrix))
