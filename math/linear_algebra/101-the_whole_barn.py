@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """The whole barn"""
-import numpy as np
 
 
 def add_matrices(mat1, mat2):
