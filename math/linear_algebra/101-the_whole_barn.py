@@ -3,9 +3,16 @@
 
 
 def add_matrices(mat1, mat2):
-    """adds two matrices"""
-    array1 = np.array(mat1)
-    array2 = np.array(mat2)
-    if array1.shape != array2.shape:
-        return None
-    return (array1 + array2).tolist()
+    """Adds two matrices of the same shape (lists of lists) without NumPy."""
+    if isinstance(mat1, list):
+        if len(mat1) != len(mat2):
+            return None
+        result = []
+        for a, b in zip(mat1, mat2):
+            sub_result = add_matrices(a, b)
+            if sub_result is None:
+                return None
+            result.append(sub_result)
+        return result
+    else:
+        return mat1 + mat2
