@@ -11,8 +11,6 @@ def cat_matrices(mat1, mat2, axis=0):
     if axis == 1:
         return [a+b for a, b in zip(mat1, mat2)]
     if axis == 2:
-        print("axis 2:")
         return [a+b for a, b in zip(mat1[0], mat2[0])]
     if axis == 3:
-        print("axis 3:")
         return [a+b for a, b in zip(mat1[0][0], mat2[0][0])]
