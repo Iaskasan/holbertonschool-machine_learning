@@ -20,9 +20,11 @@ def cat_matrices(mat1, mat2, axis=0):
         for i in range(len(mat1)):
             axis2i = []
             for j in range(len(mat1[i])):
+                if len(mat1[i][j]) != len(mat2[i][j]):
+                    return None
                 temp = mat1[i][j] + mat2[i][j]
                 axis2i.append(temp)
-            new_mat += axis2i
+            new_mat.append(axis2i)
         return new_mat
     if axis == 3:
         new_matrix = []
@@ -31,10 +33,12 @@ def cat_matrices(mat1, mat2, axis=0):
             for j in range(len(mat1[i])):
                 new_matrix_j = []
                 for k in range(len(mat1[i][j])):
+                    if len(mat1[i][j][k]) != len(mat2[i][j][k]):
+                        return None
                     new_list_k = mat1[i][j][k] + mat2[i][j][k]
                     new_matrix_j.append(new_list_k)
-                new_matrix_i += new_matrix_j
-            new_matrix += new_matrix_i
+                new_matrix_i.append(new_matrix_j)
+            new_matrix.append(new_matrix_i)
         return new_matrix
 
 
