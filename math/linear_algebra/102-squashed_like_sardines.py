@@ -42,8 +42,7 @@ def cat_matrices(mat1, mat2, axis=0):
 
 
 def mat_shape(matrix):
-    """compare the shape of 2 matrices,
-    returns None if they dont match"""
+    """gets the shape a matrix"""
     shape = []
     while isinstance(matrix, list):
         shape.append(len(matrix))
