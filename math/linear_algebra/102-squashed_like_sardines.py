@@ -22,7 +22,7 @@ def cat_matrices(mat1, mat2, axis=0):
             for j in range(len(mat1[i])):
                 temp = mat1[i][j] + mat2[i][j]
                 axis2i.append(temp)
-            new_mat.append(axis2i)
+            new_mat += axis2i
         return new_mat
     if axis == 3:
         new_matrix = []
