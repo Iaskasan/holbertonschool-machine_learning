@@ -12,8 +12,6 @@ def cat_matrices(mat1, mat2, axis=0):
         return None
 
     if axis == 0:
-        if len(mat1) != len(mat2):
-            return None
         return mat1 + mat2
     if axis > 0:
         if len(mat1) != len(mat2):
