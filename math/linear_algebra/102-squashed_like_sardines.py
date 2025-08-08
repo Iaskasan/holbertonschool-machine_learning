@@ -14,6 +14,8 @@ def cat_matrices(mat1, mat2, axis=0):
     if axis == 0:
         return mat1 + mat2
     if axis > 0:
+        if len(mat1) != len(mat2):
+            return None
         return [(cat_matrices(sub1, sub2, axis - 1))
                 for sub1, sub2 in zip(mat1, mat2)]
 
