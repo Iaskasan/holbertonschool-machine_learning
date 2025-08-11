@@ -17,5 +17,3 @@ def scatter():
     plt.xlabel("Height (in)")
     plt.ylabel("Weight (lbs)")
     plt.show()
-
-scatter()
