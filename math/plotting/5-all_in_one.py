@@ -31,7 +31,7 @@ def all_in_one():
     np.random.seed(5)
     student_grades = np.random.normal(68, 15, 50)
 
-    fig = plt.figure(figsize=(8, 10))
+    fig = plt.figure(figsize=(6.4, 4.8))
     gs = gridspec.GridSpec(3, 2, figure=fig)
     fig.suptitle("All in one")
     line = fig.add_subplot(gs[0, 0])
@@ -74,4 +74,5 @@ def all_in_one():
     freq.set_ylim(0, 30)
     freq.hist(student_grades, edgecolor="black", bins=np.arange(0, 101, 10))
 
+    plt.tight_layout()
     plt.show()
