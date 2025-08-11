@@ -6,7 +6,7 @@ import matplotlib.gridspec as gridspec
 
 
 def all_in_one():
-    """Plot all 5 previous graphs into one"""
+    """Merge all 5 previous graphs into one big figure"""
 
     y0 = np.arange(0, 11) ** 3
 
