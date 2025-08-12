@@ -23,9 +23,11 @@ def bars():
     plt.bar(x, apples, color="red", width=0.5, label="apples")
     plt.bar(x, bananas, bottom=apples, color="yellow",
             width=0.5, label="bananas")
-    plt.bar(x, oranges, bottom=apples+bananas, color="orange",
+    plt.bar(x, oranges, bottom=apples+bananas, color="#ff8000",
             width=0.5, label="oranges")
     plt.bar(x, peaches, bottom=apples+bananas+oranges, color="#ffe5b4",
             width=0.5, label="peaches")
     plt.legend()
     plt.show()
+
+bars()
