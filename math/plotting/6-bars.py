@@ -29,5 +29,3 @@ def bars():
             width=0.5, label="peaches")
     plt.legend()
     plt.show()
-
-bars()
