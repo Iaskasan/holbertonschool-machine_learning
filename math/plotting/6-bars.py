@@ -20,12 +20,14 @@ def bars():
     plt.yticks(np.arange(0, 81, 10))
     plt.xticks(x, names)
     plt.ylim(0, 80)
-    plt.bar(x, apples, color="red", width=0.5, label="Apples")
+    plt.bar(x, apples, color="red", width=0.5, label="apples")
     plt.bar(x, bananas, bottom=apples, color="yellow",
-            width=0.5, label="Bananas")
+            width=0.5, label="bananas")
     plt.bar(x, oranges, bottom=apples+bananas, color="orange",
-            width=0.5, label="Oranges")
+            width=0.5, label="oranges")
     plt.bar(x, peaches, bottom=apples+bananas+oranges, color="#ffe5b4",
-            width=0.5, label="Peaches")
+            width=0.5, label="peaches")
     plt.legend()
     plt.show()
+
+bars()
