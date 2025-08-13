@@ -63,7 +63,7 @@ def all_in_one():
     two.plot(x3, y32, label="Ra-226", color="green")
     two.set_xlim(0, 20000)
     two.set_ylim(0, 1)
-    two.legend()
+    two.legend(fontsize="x-small")
 
     freq.set_title("Project A", fontsize="x-small")
     freq.set_xlabel("Grades", fontsize="x-small")
@@ -76,3 +76,5 @@ def all_in_one():
 
     plt.tight_layout()
     plt.show()
+
+all_in_one()
