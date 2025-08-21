@@ -84,9 +84,10 @@ class Node:
         return leaves
 
     def update_bounds_below(self):
-        if self.is_root : 
-            self.upper = {0:np.inf}
-            self.lower = {0:-1*np.inf}
+        """Propagate lower and upper bounds from root down to child nodes"""
+        if self.is_root:
+            self.upper = {0: np.inf}
+            self.lower = {0: -1*np.inf}
 
         for child in [self.left_child, self.right_child]:
             if child is None:
@@ -105,6 +106,29 @@ class Node:
 
         for child in [self.left_child, self.right_child]:
             child.update_bounds_below()
+
+    def update_indicator(self):
+        """Create the indicator function that checks which individuals
+        fall into this node's bounds"""
+
+        def is_large_enough(A):
+            """Check individuals against lower bounds"""
+            if not getattr(self, "lower", None):
+                return np.ones(A.shape[0], dtype=bool)
+            checks = [A[:, k] > self.lower[k] for k in self.lower]
+            return np.all(np.array(checks), axis=0)
+
+        def is_small_enough(A):
+            """Check individuals against upper bounds"""
+            if not getattr(self, "upper", None):
+                return np.ones(A.shape[0], dtype=bool)
+            checks = [A[:, k] <= self.upper[k] for k in self.upper]
+            return np.all(np.array(checks), axis=0)
+
+        self.indicator = lambda A: np.all(
+            np.array([is_large_enough(A), is_small_enough(A)]),
+            axis=0
+        )
 
 
 class Leaf(Node):
@@ -130,7 +154,10 @@ class Leaf(Node):
     def get_leaves_below(self):
         """return a list of Leaf objects"""
         return [self]
+
     def update_bounds_below(self):
+        """Leaf implementation of
+        update_bounds_below (does nothing)."""
         pass
 
 
@@ -167,5 +194,7 @@ class Decision_Tree():
         """call the Node.get_leaves_below method for typing convenience,
         return a list of Leaves"""
         return self.root.get_leaves_below()
+
     def update_bounds(self):
+        """Propagate bounds from root down to all nodes"""
         self.root.update_bounds_below()
