@@ -69,7 +69,7 @@ class Node:
             text += "\n" + self.left_child_add_prefix(str(self.left_child))
         if self.right_child:
             text += "\n" + self.right_child_add_prefix(str(self.right_child))
-        return text.rstrip("\n")
+        return text.rstrip("\n") + "\n"
 
 
 class Leaf(Node):
