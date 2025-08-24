@@ -490,7 +490,6 @@ class Isolation_Random_Tree():
         """Get the depth of the decision tree."""
         return self.root.max_depth_below() if hasattr(self, 'root') else 0
 
-
     def count_nodes(self, only_leaves=False):
         """Count the number of nodes in the decision tree."""
         return self.root.count_nodes_below(
@@ -512,8 +511,8 @@ class Isolation_Random_Tree():
         for leaf in leaves:
             leaf.update_indicator()
 
-    def np_extrema(self,arr):
-        return np.min(arr), np.max(arr)             
+    def np_extrema(self, arr):
+        return np.min(arr), np.max(arr)
 
     def random_split_criterion(self, node):
         """Randomly select a feature and a threshold for splitting."""
@@ -578,22 +577,19 @@ class Isolation_Random_Tree():
             node.right_child = self.get_node_child(node, right_population)
             self.fit_node(node.right_child)
 
-
     def fit(self, explanatory, verbose=0):
 
         self.split_criterion = self.random_split_criterion
         self.explanatory = explanatory
-        self.root.sub_population = np.ones(explanatory.shape[0], dtype=bool)  # Correction ici
-
+        self.root.sub_population = np.ones(explanatory.shape[0], dtype=bool)
         self.fit_node(self.root)
         self.update_predict()
 
         if verbose == 1:
             print(f"""  Training finished.
-    - Depth                     : { self.depth()       }
-    - Number of nodes           : { self.count_nodes() }
-    - Number of leaves          : { self.count_nodes(only_leaves=True) }""")
-
+    - Depth                     : {self.depth()}
+    - Number of nodes           : {self.count_nodes()}
+    - Number of leaves          : {self.count_nodes(only_leaves=True)}""")
 
     def predict(self, X):
         """ Predict the leaf index for each sample in X."""
@@ -625,14 +621,15 @@ def right_child_add_prefix(text):
 
 
 class Isolation_Random_Tree:
-    """Isolation Random Tree for unsupervised outlier scoring via leaf depth."""
+    """Isolation Random Tree for unsupervised outlier
+    scoring via leaf depth."""
     def __init__(self, max_depth=10, seed=0, root=None):
-        self.rng         = np.random.default_rng(seed)
-        self.root        = root if root else Node(is_root=True)
-        self.explanatory = None          # X (n_samples, n_features)
-        self.max_depth   = max_depth
-        self.predict     = None
-        self.min_pop     = 1             # stop when subset size <= 1
+        self.rng = np.random.default_rng(seed)
+        self.root = root if root else Node(is_root=True)
+        self.explanatory = None
+        self.max_depth = max_depth
+        self.predict = None
+        self.min_pop = 1
 
     def __str__(self):
         """Return a string representation of the tree."""
@@ -662,8 +659,7 @@ class Isolation_Random_Tree:
         self.update_bounds()
         leaves = self.get_leaves()
         for leaf in leaves:
-            leaf.update_indicator()  # builds leaf.indicator(A) -> bool mask
-        # Sum (leaf.depth * indicator) across leaves: one-hot membership makes this work
+            leaf.update_indicator()
         self.predict = lambda A: np.sum(
             [leaf.depth * leaf.indicator(A).astype(int) for leaf in leaves],
             axis=0
@@ -674,7 +670,8 @@ class Isolation_Random_Tree:
         return np.min(arr), np.max(arr)
 
     def random_split_criterion(self, node):
-        """Randomly pick (feature, threshold) within observed range at this node."""
+        """Randomly pick (feature, threshold)
+        within observed range at this node."""
         diff = 0.0
         while diff == 0.0:
             feature = self.rng.integers(0, self.explanatory.shape[1])
@@ -690,10 +687,10 @@ class Isolation_Random_Tree:
         Create a leaf. For isolation trees, we predict by leaf depth,
         so we can store any value; we rely on leaf.depth in predict.
         """
-        value = 0  # not used; prediction uses leaf.depth
+        value = 0
         leaf_child = Leaf(value)
         leaf_child.depth = node.depth + 1
-        leaf_child.subpopulation = sub_population  # matches your earlier naming
+        leaf_child.subpopulation = sub_population
         return leaf_child
 
     def get_node_child(self, node, sub_population):
