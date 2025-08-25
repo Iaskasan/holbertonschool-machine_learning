@@ -4,6 +4,7 @@ import numpy as np
 
 
 class Neuron:
+    """Neuron class"""
     def __init__(self, nx):
         """nx: number of input features to the neuron"""
         self.nx = nx
