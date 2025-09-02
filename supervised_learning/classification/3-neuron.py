@@ -35,6 +35,7 @@ class Neuron:
         return self.__A
 
     def cost(self, Y, A):
+        "Calculate the cost of a model using logistic regression"
         m = Y.shape[1]
         cost = -(1 / m) * np.sum(
             Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
