@@ -50,5 +50,6 @@ class Neuron:
     def evaluate(self, X, Y):
         """evaluate the neuron's prediction"""
         A = self.forward_prop(X)
-        pred = (A >= 0.5).astype(int) # .astype transform booleans into int(O or 1)
+        # .astype transform booleans into int(O or 1)
+        pred = (A >= 0.5).astype(int)
         return pred, self.cost(Y, A)
