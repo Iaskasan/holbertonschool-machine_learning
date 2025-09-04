@@ -109,3 +109,19 @@ class NeuralNetwork:
             Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
         )
         return cost
+
+    def evaluate(self, X, Y):
+        """evaluate the neuron's prediction"""
+        A = self.forward_prop(X)
+        # .astype transforms booleans into int(O or 1)
+        pred = (A >= 0.5).astype(int)
+        return pred, self.cost(Y, A)
+
+    def gradient_descent(self, X, Y, A, alpha=0.05):
+        """calculate one pass of gradient descent on the neuron"""
+        m = Y.shape[1]
+        dZ = A - Y
+        dW = (dZ @ X.T) / m
+        db = np.sum(dZ) / m
+        self.__W = self.__W - alpha * dW
+        self.__b = self.__b - alpha * db
