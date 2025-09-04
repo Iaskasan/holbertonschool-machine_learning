@@ -117,11 +117,16 @@ class NeuralNetwork:
         pred = (A >= 0.5).astype(int)
         return pred, self.cost(Y, A)
 
-    def gradient_descent(self, X, Y, A, alpha=0.05):
+    def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """calculate one pass of gradient descent on the neuron"""
         m = Y.shape[1]
-        dZ = A - Y
-        dW = (dZ @ X.T) / m
-        db = np.sum(dZ) / m
-        self.__W = self.__W - alpha * dW
-        self.__b = self.__b - alpha * db
+        dZ1 = A1 - Y
+        dW1 = (dZ1 @ X.T) / m
+        db1 = np.sum(dZ1) / m
+        dZ2 = A2 - Y
+        dW2 = (dZ2 @ X.T) / m
+        db2 = np.sum(dZ2) / m
+        self.__W1 = self.__W1 - alpha * dW1
+        self.__W2 = self.__W2 - alpha * dW2
+        self.__b1 = self.__b1 - alpha * db1
+        self.__b2 = self.__b2 - alpha * db2
