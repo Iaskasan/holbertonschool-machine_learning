@@ -119,7 +119,8 @@ class NeuralNetwork:
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """
-        One pass of gradient descent for a 1-hidden-layer NN (sigmoid -> sigmoid).
+        One pass of gradient descent for a
+        1-hidden-layer NN (sigmoid -> sigmoid)
 
         Shapes:
         X  : (nx, m)
