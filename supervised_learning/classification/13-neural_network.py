@@ -118,14 +118,28 @@ class NeuralNetwork:
         return pred, self.cost(Y, A)
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
-        """calculate one pass of gradient descent on the neuron"""
+        """
+        One pass of gradient descent for a 1-hidden-layer NN (sigmoid -> sigmoid).
+
+        Shapes:
+        X  : (nx, m)
+        Y  : (1, m)
+        A1 : (nodes, m)
+        A2 : (1, m)
+        W1 : (nodes, nx)
+        b1 : (nodes, 1)
+        W2 : (1, nodes)
+        b2 : (1, 1)
+        """
         m = Y.shape[1]
+
         dZ2 = A2 - Y
         dW2 = (dZ2 @ A1.T) / m
-        db2 = np.sum(dZ2) / m
-        dZ1 = A1 - Y
+        db2 = np.sum(dZ2, axis=1, keepdims=True) / m
+
+        dZ1 = (self.__W2.T @ dZ2) * (A1 * (1 - A1))
         dW1 = (dZ1 @ X.T) / m
-        db1 = np.sum(dZ1) / m
+        db1 = np.sum(dZ1, axis=1, keepdims=True) / m
 
         self.__W1 = self.__W1 - alpha * dW1
         self.__W2 = self.__W2 - alpha * dW2
