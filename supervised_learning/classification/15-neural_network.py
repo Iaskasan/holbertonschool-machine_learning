@@ -2,6 +2,7 @@
 """Neural network module"""
 import numpy as np
 
+
 class NeuralNetwork:
     """Neural Network class"""
     def __init__(self, nx, nodes):
@@ -157,7 +158,6 @@ class NeuralNetwork:
         if alpha < 0:
             raise ValueError("alpha must be positive")
         for _ in range(iterations):
-            A = self.forward_prop(X)
-            self.gradient_descent(X, Y, A, alpha)
+            A1, A2 = self.forward_prop(X)
+            self.gradient_descent(X, Y, A1, A2, alpha)
         return self.evaluate(X, Y)
-
