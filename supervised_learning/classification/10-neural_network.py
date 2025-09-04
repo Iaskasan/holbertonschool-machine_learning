@@ -88,7 +88,8 @@ class NeuralNetwork:
 
         Updates:
             __A1 (numpy.ndarray): hidden layer activations, shape (nodes, m)
-            __A2 (numpy.ndarray): output layer activations (predictions), shape (1, m)
+            __A2 (numpy.ndarray): output layer activations (predictions),
+            shape (1, m)
 
         Returns:
             tuple: (__A1, __A2)
