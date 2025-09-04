@@ -2,6 +2,7 @@
 """Neural network module"""
 import numpy as np
 
+
 class NeuralNetwork:
     """Neural Network class"""
     def __init__(self, nx, nodes):
