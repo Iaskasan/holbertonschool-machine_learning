@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Neural network module"""
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class NeuralNetwork:
@@ -147,8 +148,10 @@ class NeuralNetwork:
         self.__b1 = self.__b1 - alpha * db1
         self.__b2 = self.__b2 - alpha * db2
 
-    def train(self, X, Y, iterations=5000, alpha=0.05):
-        """train the neuron"""
+    def train(self, X, Y, iterations=5000, alpha=0.05,
+              verbose=True, graph=True, step=100):
+        """train the neuron with plotting and verbose
+        during the training process"""
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
         if iterations < 1:
@@ -157,7 +160,35 @@ class NeuralNetwork:
             raise TypeError("alpha must be a float")
         if alpha < 0:
             raise ValueError("alpha must be positive")
-        for _ in range(iterations):
+        if verbose or graph:
+            if type(step) is not int:
+                raise TypeError("step must be an integer")
+            if step <= 0 or step > iterations:
+                raise ValueError("step must be positive and <= iterations")
+        if graph:
+            plt.ion()
+            fig, ax = plt.subplots()
+            costs = []
+            iters = []
+
+        for i in range(iterations + 1):
             A1, A2 = self.forward_prop(X)
             self.gradient_descent(X, Y, A1, A2, alpha)
+
+            if verbose and (i % step == 0 or i == iterations):
+                print(f"Cost after {i} iterations: {self.cost(Y, A2)}")
+
+            if graph and (i % step == 0):
+                costs.append(self.cost(Y, A2))
+                iters.append(i)
+                ax.clear()
+                ax.plot(iters, costs)
+                ax.set_xlabel("iteration")
+                ax.set_ylabel("cost")
+                ax.set_title("Training Cost")
+                plt.pause(0.01)
+        if graph:
+            plt.ioff()
+            plt.show()
+
         return self.evaluate(X, Y)
