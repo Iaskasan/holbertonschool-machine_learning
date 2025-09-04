@@ -2,7 +2,6 @@
 """Neural network module"""
 import numpy as np
 
-
 class NeuralNetwork:
     """Neural Network class"""
     def __init__(self, nx, nodes):
@@ -117,11 +116,47 @@ class NeuralNetwork:
         pred = (A >= 0.5).astype(int)
         return pred, self.cost(Y, A)
 
-    def gradient_descent(self, X, Y, A, alpha=0.05):
-        """calculate one pass of gradient descent on the neuron"""
+    def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
+        """
+        One pass of gradient descent for a
+        1-hidden-layer NN (sigmoid -> sigmoid)
+
+        Shapes:
+        X  : (nx, m)
+        Y  : (1, m)
+        A1 : (nodes, m)
+        A2 : (1, m)
+        W1 : (nodes, nx)
+        b1 : (nodes, 1)
+        W2 : (1, nodes)
+        b2 : (1, 1)
+        """
         m = Y.shape[1]
-        dZ = A - Y
-        dW = (dZ @ X.T) / m
-        db = np.sum(dZ) / m
-        self.__W = self.__W - alpha * dW
-        self.__b = self.__b - alpha * db
+
+        dZ2 = A2 - Y
+        dW2 = (dZ2 @ A1.T) / m
+        db2 = np.sum(dZ2, axis=1, keepdims=True) / m
+
+        dZ1 = (self.__W2.T @ dZ2) * (A1 * (1 - A1))
+        dW1 = (dZ1 @ X.T) / m
+        db1 = np.sum(dZ1, axis=1, keepdims=True) / m
+
+        self.__W1 = self.__W1 - alpha * dW1
+        self.__W2 = self.__W2 - alpha * dW2
+        self.__b1 = self.__b1 - alpha * db1
+        self.__b2 = self.__b2 - alpha * db2
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """train the neuron"""
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations < 1:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha < 0:
+            raise ValueError("alpha must be positive")
+        for _ in range(iterations):
+            A1, A2 = self.forward_prop(X)
+            self.gradient_descent(X, Y, A1, A2, alpha)
+        return self.evaluate(X, Y)
