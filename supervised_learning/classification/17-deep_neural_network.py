@@ -68,4 +68,4 @@ class DeepNeuralNetwork:
 
     @property
     def cache(self):
-        return self.cache
+        return self.__cache
