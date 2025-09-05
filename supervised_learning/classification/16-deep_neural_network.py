@@ -44,16 +44,28 @@ class DeepNeuralNetwork:
         if type(layers) is not list or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
 
-        self.L = len(layers)
-        self.cache = {}
-        self.weights = {}
+        self.__L = len(layers)
+        self.__cache = {}
+        self.__weights = {}
 
         for layer in range(self.L):
             nodes_curr = layers[layer]
             if type(nodes_curr) is not int or nodes_curr <= 0:
                 raise TypeError("layers must be a list of positive integers")
             nodes_prev = nx if layer == 0 else layers[layer - 1]
-            self.weights[f"W{layer+1}"] = (
+            self.__weights[f"W{layer+1}"] = (
                 np.random.randn(nodes_curr, nodes_prev) *
                 np.sqrt(2 / nodes_prev))
-            self.weights[f"b{layer+1}"] = np.zeros((nodes_curr, 1))
+            self.__weights[f"b{layer+1}"] = np.zeros((nodes_curr, 1))
+
+    @property
+    def weights(self):
+        return self.__weights
+
+    @property
+    def L(self):
+        return self.__L
+
+    @property
+    def cache(self):
+        return self.cache
