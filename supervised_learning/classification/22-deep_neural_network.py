@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """deep neural network module"""
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class DeepNeuralNetwork:
@@ -247,12 +246,5 @@ class DeepNeuralNetwork:
 
             if i < iterations:
                 self.gradient_descent(Y, cache, alpha)
-
-        if graph:
-            plt.plot(it_hist, cost_hist)
-            plt.xlabel("iteration")
-            plt.ylabel("cost")
-            plt.title("Training Cost")
-            plt.show()
 
         return self.evaluate(X, Y)
