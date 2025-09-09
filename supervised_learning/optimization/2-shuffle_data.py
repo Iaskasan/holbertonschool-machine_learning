@@ -14,6 +14,6 @@ def shuffle_data(X, Y):
     Returns:
         (X_shuffled, Y_shuffled): shuffled versions of X and Y
     """
-    X_shuffle = np.random.permutation(X)
-    Y_shuffle = np.random.permutation(Y)
-    return X_shuffle, Y_shuffle
+    m = X.shape[0]
+    shuffle = np.random.permutation(m)
+    return X[shuffle], Y[shuffle]
