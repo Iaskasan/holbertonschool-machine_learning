@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+"""perform a batch normalization to an entire NN
+before passing to the activation function"""
 import tensorflow as tf
-"""perform a batch normalization for an entire NN before
-passing to the activation function"""
 
 
 def create_batch_norm_layer(prev, n, activation):
@@ -9,11 +9,11 @@ def create_batch_norm_layer(prev, n, activation):
     Creates a Dense -> BatchNorm -> Activation block.
 
     Args:
-        prev: Tensor, activated output of the previous layer
-        (shape [batch, ...]).
+        prev: Tensor, activated output of the previous
+        layer (shape [batch, ...]).
         n: int, number of nodes (units) for the Dense layer.
-        activation: callable activation function
-        (e.g., tf.nn.relu, tf.nn.tanh).
+        activation: activation to apply; can be a callable (e.g., tf.nn.relu)
+                    or a string (e.g., "relu", "tanh", "sigmoid").
 
     Returns:
         Tensor: activated output of the block.
@@ -34,7 +34,10 @@ def create_batch_norm_layer(prev, n, activation):
         beta_initializer='zeros',
         gamma_initializer='ones'
     )
+
     z_norm = bn(z)
 
-    out = activation(z_norm)
+    act = tf.keras.activations.get(activation)
+    out = act(z_norm)
+
     return out
