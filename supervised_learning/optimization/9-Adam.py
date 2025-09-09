@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Update var via Adam algo"""
 import numpy as np
 
 
