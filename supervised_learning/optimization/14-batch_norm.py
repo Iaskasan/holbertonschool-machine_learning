@@ -17,7 +17,6 @@ def create_batch_norm_layer(prev, n, activation):
     Returns:
         Tensor: the activated output of the block.
     """
-    # 1) Linear layer (no bias: beta will play that role after normalization)
     initializer = tf.keras.initializers.VarianceScaling(mode='fan_avg')
     dense = tf.keras.layers.Dense(
         units=n,
@@ -26,22 +25,18 @@ def create_batch_norm_layer(prev, n, activation):
     )
     z = dense(prev)
     batch_mean, batch_var = tf.nn.moments(z, axes=[0])
-
     gam = tf.Variable(tf.ones([n]), trainable=True, name=f"{dense.name}_gamma")
     bet = tf.Variable(tf.zeros([n]), trainable=True, name=f"{dense.name}_beta")
-
-    # 4) Normalize + scale/shift (epsilon avoids division by zero)
     eps = 1e-7
     z_hat = tf.nn.batch_normalization(
         x=z,
         mean=batch_mean,
         variance=batch_var,
-        offset=bet,     # beta (shift)
-        scale=gam,     # gamma (scale)
+        offset=bet,
+        scale=gam,
         variance_epsilon=eps
-    )  # shape: [batch_size, n]
+    )
 
-    # 5) Activation (accepts callable or string)
     if activation is None:
         return z_hat
     act_fn = tf.keras.activations.get(activation)
