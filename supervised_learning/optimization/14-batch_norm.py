@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""perform a batch normalization to an entire NN
-before passing to the activation function"""
+"""Batch normalisation of a layer"""
 import tensorflow as tf
 
 
@@ -9,15 +8,16 @@ def create_batch_norm_layer(prev, n, activation):
     Creates a Dense -> BatchNorm -> Activation block.
 
     Args:
-        prev: Tensor, activated output of the previous
-        layer (shape [batch, ...]).
-        n: int, number of nodes (units) for the Dense layer.
-        activation: activation to apply; can be a callable (e.g., tf.nn.relu)
-                    or a string (e.g., "relu", "tanh", "sigmoid").
+        prev: Tensor, activated output of the previous layer
+        (shape [batch_size, ...]).
+        n: int, number of units for the Dense layer.
+        activation: callable or string, activation to apply
+        (e.g., tf.nn.relu or "relu").
 
     Returns:
-        Tensor: activated output of the block.
+        Tensor: the activated output of the block.
     """
+    # 1) Linear layer (no bias: beta will play that role after normalization)
     initializer = tf.keras.initializers.VarianceScaling(mode='fan_avg')
     dense = tf.keras.layers.Dense(
         units=n,
@@ -25,19 +25,24 @@ def create_batch_norm_layer(prev, n, activation):
         kernel_initializer=initializer
     )
     z = dense(prev)
+    batch_mean, batch_var = tf.nn.moments(z, axes=[0])
 
-    bn = tf.keras.layers.BatchNormalization(
-        axis=-1,
-        epsilon=1e-7,
-        center=True,
-        scale=True,
-        beta_initializer='zeros',
-        gamma_initializer='ones'
-    )
+    gam = tf.Variable(tf.ones([n]), trainable=True, name=f"{dense.name}_gamma")
+    bet = tf.Variable(tf.zeros([n]), trainable=True, name=f"{dense.name}_beta")
 
-    z_norm = bn(z)
+    # 4) Normalize + scale/shift (epsilon avoids division by zero)
+    eps = 1e-7
+    z_hat = tf.nn.batch_normalization(
+        x=z,
+        mean=batch_mean,
+        variance=batch_var,
+        offset=bet,     # beta (shift)
+        scale=gam,     # gamma (scale)
+        variance_epsilon=eps
+    )  # shape: [batch_size, n]
 
-    act = tf.keras.activations.get(activation)
-    out = act(z_norm)
-
-    return out
+    # 5) Activation (accepts callable or string)
+    if activation is None:
+        return z_hat
+    act_fn = tf.keras.activations.get(activation)
+    return act_fn(z_hat)
