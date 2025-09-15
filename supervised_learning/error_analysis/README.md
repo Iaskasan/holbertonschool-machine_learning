@@ -123,3 +123,42 @@ def create_confusion_matrix(labels, logits):
 
     return confusion
 ```
+### Example
+
+```python
+labels = np.array([[1,0,0],
+                   [0,1,0],
+                   [0,0,1],
+                   [1,0,0]])
+
+logits = np.array([[1,0,0],
+                   [0,0,1],
+                   [0,0,1],
+                   [0,1,0]])
+
+print(create_confusion_matrix(labels, logits))
+```
+**Output:**
+```python
+[[1 1 0]
+ [0 0 1]
+ [0 0 1]]
+```
+
+---
+
+✅ Summary
+
+- **Confusion Matrix** = full view of classification performance.
+
+- **Type I vs II** = false alarm vs missed detection.
+
+- **Sensitivity, Specificity, Precision, Recall** = different ways to measure correctness.
+
+- **F1 Score** = balances precision & recall.
+
+- **Bias & Variance** = model vs data error sources.
+
+- **Irreducible/Bayes Error** = limits of performance.
+
+- **Bias vs Variance calculations** = compare training, validation, and human-level performance.
