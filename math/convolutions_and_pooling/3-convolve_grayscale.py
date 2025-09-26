@@ -5,7 +5,8 @@ import numpy as np
 
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     """
-    Performs a 2D convolution on grayscale images with optional padding and stride.
+    Performs a 2D convolution on grayscale images with optional
+    padding and stride.
 
     Args:
         images (numpy.ndarray): Input images of shape (m, h, w).
@@ -37,7 +38,8 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     Example:
         >>> images = np.random.randint(0, 256, (2, 5, 5))
         >>> kernel = np.array([[1, 0], [0, -1]])
-        >>> convolve_grayscale(images, kernel, padding='valid', stride=(1, 1)).shape
+        >>> convolve_grayscale(images, kernel, padding='valid',
+        stride=(1, 1)).shape
         (2, 4, 4)
     """
     m, h, w = images.shape
