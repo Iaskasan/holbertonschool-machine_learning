@@ -35,7 +35,6 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
           it explicitly performs the operation using numpy.
 
     Example:
-        >>> import numpy as np
         >>> images = np.random.randint(0, 256, (2, 5, 5))
         >>> kernel = np.array([[1, 0], [0, -1]])
         >>> convolve_grayscale(images, kernel, padding='valid', stride=(1, 1)).shape
