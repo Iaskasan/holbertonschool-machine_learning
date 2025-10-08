@@ -8,6 +8,7 @@ projection_block = __import__('3-projection_block').projection_block
 
 
 def resnet50():
+    """Builds the ResNet architecture using 50 layers"""
     he_init = K.initializers.he_normal(seed=0)
     input_layer = K.Input(shape=(224, 224, 3))
 
