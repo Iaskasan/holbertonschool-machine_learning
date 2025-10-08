@@ -7,14 +7,7 @@ from tensorflow import keras as K
 
 def identity_block(A_prev, filters):
     """
-    Builds an identity block as described in
-    Deep Residual Learning for Image Recognition (2015)
-
-    Args:
-        A_prev: output from the previous layer
-        filters: tuple/list (F11, F3, F12)
-    Returns:
-        Activated output of the identity block
+    Builds an identity block
     """
     F11, F3, F12 = filters
     he_init = K.initializers.he_normal(seed=0)
