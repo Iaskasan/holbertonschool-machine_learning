@@ -137,6 +137,4 @@ if __name__ == "__main__":
     model = train_model(model, X_train, Y_train, X_test, Y_test, plotting='True')
 
     # Save trained model
-    model.save("cifar10.h5")
-
-    # Adds visual of the history of the model (loss, accuracy, etc...)
+    model.save(f"cifar10_{model.name}.h5")
