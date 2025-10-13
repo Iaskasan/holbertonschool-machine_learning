@@ -205,5 +205,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-
-*main.py
+math/convolutions_and_pooling/main.py
+supervised_learning/cnn/main.py
+supervised_learning/deep_cnns/main.py
