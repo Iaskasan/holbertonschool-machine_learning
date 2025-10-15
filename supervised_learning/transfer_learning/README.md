@@ -12,6 +12,9 @@ shape (32, 32, 3)
 
 ## Model Tested
 
+### Notes
+
+Some Architectures include a preprocessing (EfficientNetV2M for instance), so you have to add include_preprocessing=False as an argument when building the model
 ### ResNet50V2
 
 - The model is 103 layers deep
@@ -19,6 +22,16 @@ shape (32, 32, 3)
 - The model has 25.6M	parameters and performs with 76.0% Top-1 Accuracy and 93.0% Top-5 Accuracy
 - total training with 20 epoch ~ 40 mins
 - stopped after epoch 18/20 (Early stopping)
+
+### MobileNetV2
+
+- with all in-buit layers freeze and trained on 20 epochs it outputs 0.8469
+
+### EfficientNetV2S
+
+- 20 epochs: 0.8738 accuracy
+- disable in-built preprocessing
+
 ### 📈 Training Results
 
 Here’s the model’s accuracy over 18 epochs:
