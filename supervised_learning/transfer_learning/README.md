@@ -1,4 +1,5 @@
 TODO: Fix accuracy plotting not working, adding model name to the plot's title
+main bug, accuracy showing learning step
 
 
 ## CIFAR10 Dataset
