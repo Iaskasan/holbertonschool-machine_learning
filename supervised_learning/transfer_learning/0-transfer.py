@@ -19,7 +19,6 @@ from datetime import datetime
 # Tweaking section, here you can modify saving directories, verbose, fine tuning parameters...
 MODEL_NAME = "mobilenetv2" # this will be the prefix of the saved files
 BASE_MODEL = tf.keras.applications.MobileNetV2
-METRICS = ["Accuracy"]
 TARGET_SIZE = (224, 224)
 
 EPOCHS_STAGE1 = 5        # initial frozen training
@@ -87,7 +86,7 @@ def compile_and_train(model, lr, epochs, X_train, Y_train, X_val, Y_val, phase):
     model.compile(
         optimizer=tf.keras.optimizers.Adam(learning_rate=lr),
         loss="categorical_crossentropy",
-        metrics=METRICS
+        metrics=["accuracy"]
     )
 
     callbacks = [
