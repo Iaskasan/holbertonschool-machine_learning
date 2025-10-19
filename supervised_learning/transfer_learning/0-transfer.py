@@ -17,27 +17,29 @@ from datetime import datetime
 
 
 # Tweaking section, here you can modify saving directories, verbose, fine tuning parameters...
-MODEL_NAME = "mobilenetv2" # this will be the prefix of the saved files
-BASE_MODEL = tf.keras.applications.MobileNetV2
+MODEL_NAME = "efficientnetv2s_20ep" # this will be the prefix of the saved files
+BASE_MODEL = tf.keras.applications.EfficientNetV2S
 TARGET_SIZE = (224, 224)
 
-EPOCHS_STAGE1 = 5        # initial frozen training
-EPOCHS_STAGE2 = 3        # fine-tuning phase
-BATCH_SIZE = 64
+EPOCHS_STAGE1 = 20        # initial frozen training
+EPOCHS_STAGE2 = 15        # fine-tuning phase
+BATCH_SIZE = 128
+EARLY_STOPPING = 3       # Early-stopping patience value
 
 LR_STAGE1 = 1e-4          # learning rate for head training
-LR_STAGE2 = 1e-5          # lower learning rate for fine-tuning
+LR_STAGE2 = 1e-6          # lower learning rate for fine-tuning
 
 UNFREEZE_LAYERS = 20      # number of top layers to unfreeze
 DROPOUT1 = 0.5
 DROPOUT2 = 0.3
 DENSE1 = 512
 DENSE2 = 256
-PREPROCESSING = False
+PREPROCESSING = False     # Some models have in-built preprocessing,
+                          # set this to False if you want to use the custom preprocessing
 
 USE_MIXED_PRECISION = True
-SAVE_DIR = "trained_models"
-PLOTS_DIR = "training_plots"
+SAVE_DIR = f"trained_models/{MODEL_NAME}"
+PLOTS_DIR = f"training_plots/{MODEL_NAME}"
 LOGS_DIR = "logs"
 LOG_FILE = "training_results.csv"
 
@@ -65,6 +67,7 @@ def build_model(input_shape):
         include_top=False,
         weights="imagenet",
         input_tensor=x,
+        include_preprocessing=PREPROCESSING
     )
     base_model.trainable = False  # frozen for stage 1
 
@@ -90,7 +93,7 @@ def compile_and_train(model, lr, epochs, X_train, Y_train, X_val, Y_val, phase):
     )
 
     callbacks = [
-        tf.keras.callbacks.EarlyStopping(patience=3, restore_best_weights=True),
+        tf.keras.callbacks.EarlyStopping(patience=EARLY_STOPPING, restore_best_weights=True),
         tf.keras.callbacks.ReduceLROnPlateau(factor=0.5, patience=1, min_lr=1e-6)
     ]
 

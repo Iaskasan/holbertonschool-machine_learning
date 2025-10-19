@@ -1,5 +1,0 @@
-timestamp,model,stage,epochs,batch_size,learning_rate,best_val_accuracy,best_val_loss,total_time_sec
-2025-10-15 15:46:30,cifar10_mobilenetv2,Stage 1 (Frozen),5,64,0.0001,0,0.5294,0
-2025-10-15 15:48:48,cifar10_mobilenetv2,Stage 2 (Fine-Tuning),3,64,1e-05,0,0.466,0
-2025-10-15 15:59:13,cifar10_mobilenetv2,Stage 1 (Frozen),5,64,0.0001,0.8155,0.53,0
-2025-10-15 16:01:44,cifar10_mobilenetv2,Stage 2 (Fine-Tuning),3,64,1e-05,0.8431,0.4594,0

@@ -9,5 +9,5 @@ if not hasattr(K.backend, 'learning_phase'):
 
 _, (X, Y) = K.datasets.cifar10.load_data()
 X_p, Y_p = preprocess_data(X, Y)
-model = K.models.load_model('trained_models/cifar10_mobilenetv2_finetuned.h5', safe_mode=False)
+model = K.models.load_model('trained_models/efficientnetv2s_20ep/cifar10_efficientnetv2s_20ep_finetuned.h5', safe_mode=False)
 model.evaluate(X_p, Y_p, batch_size=128, verbose=1)

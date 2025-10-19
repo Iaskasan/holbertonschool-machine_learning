@@ -1,6 +1,4 @@
-TODO: Fix accuracy plotting not working, adding model name to the plot's title
-main bug, accuracy showing learning step
-
+# First steps in Transfer Learning
 
 ## CIFAR10 Dataset
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images
@@ -14,11 +12,20 @@ shape (32, 32, 3)
 
 - first time running the code will download cifar10 dataset
 
+---
 ## Model Tested
+
+| Model | Params | Top-1 Acc | CIFAR-10 Val Acc | Notes |
+|--------|---------|------------|------------------|-------|
+| ResNet50V2 | 25.6M | 76.0% | ~0.82 | 98 MB, stopped early at epoch 18 |
+| MobileNetV2 | 3.5M | 71.8% | ~0.84 | Light and fast, efficient for small images |
+| EfficientNetV2S | 21.5M | 83.9% | **0.87+** | Disable built-in preprocessing! |
 
 ### Notes
 
 Some Architectures include a preprocessing (EfficientNetV2M for instance), so you have to add include_preprocessing=False as an argument when building the model
+
+---
 ### ResNet50V2
 
 - The model is 103 layers deep
@@ -27,20 +34,23 @@ Some Architectures include a preprocessing (EfficientNetV2M for instance), so yo
 - total training with 20 epoch ~ 40 mins
 - stopped after epoch 18/20 (Early stopping)
 
+---
 ### MobileNetV2
 
 - with all in-buit layers freeze and trained on 20 epochs it outputs 0.8469
 
+---
 ### EfficientNetV2S
 
 - 20 epochs: 0.8738 accuracy
 - disable in-built preprocessing
 
+---
 ### 📈 Training Results
 
-Here’s the model’s accuracy over 18 epochs:
+- EfficientNetV2S
 
-![Training Accuracy](images/ResNet50V2.png)
+![Training Accuracy](training_plots/ResNet50V2.png)
 ---
 
 ### Step 1 - Understand what you're working with
@@ -54,7 +64,9 @@ Here’s the model’s accuracy over 18 epochs:
 ---
 ### Step 2 - Preprocess the data
 
-- Normalize images → values in [0, 1] instead of [0, 255]
+- Normalize images → values in [0, 1] or [-1, 1] instead of [0, 255]
+
+- Resize the images from 32x32 to ~224x224 depending on the architecture we work with
 
 - One-hot encode the labels (Y), since we're doing categorical classification
 
@@ -64,18 +76,18 @@ tensorflow.keras.utils.to_categorical
 ---
 ### Step 3 - Choosing a pretrained model
 
-- Picking the ResNet50v2
-- Making sure the image size are of same shape (pretrained models from tf.keras.applications expect images of size (224, 224))
+- I've tested the three models enumerated above
+- I quickly noticed that a heavy model like ResNet50 was not the best fit for a light dataset like CIFAR-10
 
 ---
-### Step 4 - Create a Lambda layer for resizing
+### Step 4 - Resizing layer to fit the model's input size
 
 - Resizing the images' shape from (32, 32) to (224, 224)
 ```python
-tf.keras.layers.Lambda(lambda image: tf.image.resize(image, (target_height, target_width)))
+tf.keras.layers.Resizing(*TARGET_SIZE)(inputs)
 ```
 ---
-### Step 5 - Freeze most of the base model
+### Step 5 - Freeze the base model
 
 - Set ```include_top=False``` (so you can add your own dense head)
 
@@ -122,3 +134,56 @@ model.save('cifar10.h5')
 - Create the file and fill it with requirements needed
 - Freeze the file when the model is ready
 
+## How to use
+
+- Clone the repository
+```
+git clone https://github.com/Iaskasan/holbertonschool-machine_learning.git
+cd supervised_learning/transfer_learning
+```
+
+- Create and activate a virtual environment
+```
+python3 -m venv .venv
+source .venv/bin/activate   # On Windows: .venv\Scripts\activate
+```
+
+- Install dependencies
+```
+pip install -r requirements.txt
+```
+- Run training
+  - You can tweak global variables and change model at the top of the script:
+```
+EPOCHS = 20
+LEARNING_RATE = 1e-4
+UNFREEZE_LAYERS = 50
+ENABLE_PLOTTING = True
+```
+Then launch training:
+```
+python 0-transfer.py
+```
+- Evaluate a trained model
+```
+python 0-main.py
+```
+- Results and saved files
+
+Trained models → trained_models/
+
+Plots → training_plots/
+
+CSV logs → logs/
+
+
+## Acknowledgments
+
+- TensorFlow / Keras for pretrained models
+- CIFAR-10 dataset from Alex Krizhevsky
+- Special thanks to Holberton School for the deep learning curriculum
+
+## References
+
+[Tensorflow Transfer Learning Guide](https://www.tensorflow.org/tutorials/images/transfer_learning)
+[CIFAR-10 Dataset](https://www.cs.toronto.edu/~kriz/cifar.html)
