@@ -208,3 +208,6 @@ __marimo__/
 math/convolutions_and_pooling/main.py
 supervised_learning/cnn/main.py
 supervised_learning/deep_cnns/main.py
+
+# Models and test files
+yolo.h5
