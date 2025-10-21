@@ -53,17 +53,20 @@ class Yolo:
         ----------
         outputs : list of numpy.ndarrays
             Predictions from the Darknet model for one image.
-            Each array has shape (grid_h, grid_w, anchor_boxes, 4 + 1 + classes).
+            Each array has shape
+            (grid_h, grid_w, anchor_boxes,4 + 1 + classes).
         image_size : numpy.ndarray
             Original image size [image_height, image_width].
 
         Returns
         -------
         boxes : list of numpy.ndarrays
-            Shape (grid_h, grid_w, anchor_boxes, 4), each containing the processed
+            Shape (grid_h, grid_w, anchor_boxes, 4),
+            each containing the processed
             boundary boxes (x1, y1, x2, y2) relative to the original image.
         box_confidences : list of numpy.ndarrays
-            Shape (grid_h, grid_w, anchor_boxes, 1), each containing the confidence
+            Shape (grid_h, grid_w, anchor_boxes, 1),
+            ach containing the confidence
             that the box contains an object.
         box_class_probs : list of numpy.ndarrays
             Shape (grid_h, grid_w, anchor_boxes, classes), each containing
