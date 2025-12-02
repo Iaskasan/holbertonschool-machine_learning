@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""Returns the shape of a matrix"""
+
 
 def matrix_shape(matrix):
     """gets the shape of a given matrix of any dimension"""
