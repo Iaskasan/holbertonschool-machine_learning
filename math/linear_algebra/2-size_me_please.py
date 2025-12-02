@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 def matrix_shape(matrix):
+    """gets the shape of a given matrix of any dimension"""
     size = []
     if type(matrix) is list:
         size.append(len(matrix))
