@@ -5,7 +5,7 @@
 def poly_derivative(poly):
     """Outputs a list of the derivatives
     of a given polynomial list"""
-    if type(poly) is not list:
+    if type(poly) is not list or len(poly) < 1:
         return None
     result = []
     for i in range(len(poly)):
