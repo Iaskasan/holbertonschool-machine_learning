@@ -75,7 +75,8 @@ class Node:
         if self.left_child is not None:
             total += self.left_child.count_nodes_below(only_leaves=only_leaves)
         if self.right_child is not None:
-            total += self.right_child.count_nodes_below(only_leaves=only_leaves)
+            total += self.right_child.count_nodes_below(
+                only_leaves=only_leaves)
         if not only_leaves:
             total += 1
         return total
