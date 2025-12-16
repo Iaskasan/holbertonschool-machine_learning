@@ -111,6 +111,15 @@ class Leaf(Node):
         return self.depth
 
     def count_nodes_below(self, only_leaves=False):
+        """
+        Count the number of nodes in the subtree rooted at this leaf.
+
+        Args:
+            only_leaves (bool): Whether to count only leaf nodes.
+
+        Returns:
+            int: Number of nodes in the subtree rooted at this leaf.
+        """
         return 1
 
 
@@ -155,4 +164,11 @@ class Decision_Tree:
         return self.root.max_depth_below()
 
     def count_nodes(self, only_leaves=False):
+        """
+        Count the number of nodes in the decision tree.
+        Args:
+            only_leaves (bool): Whether to count only leaf nodes.
+        Returns:
+            int: Number of nodes in the tree.
+        """
         return self.root.count_nodes_below(only_leaves=only_leaves)
