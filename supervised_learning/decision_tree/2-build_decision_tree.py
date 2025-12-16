@@ -92,7 +92,7 @@ class Node:
         Returns:
             str: Formatted representation of the subtree.
         """
-        return "\n".join(self._str_lines())
+        return "\n".join(self._str_lines()) + "\n"
 
     def _str_lines(self, prefix=""):
         """
