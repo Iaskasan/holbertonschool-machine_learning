@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""
+Decision tree implementation using Node and Leaf classes.
+
+This module defines the core data structures used to build and
+analyze a decision tree, including recursive depth computation.
+"""
+import numpy as np
+
+
+class Node:
+    """
+    Represents an internal node in a decision tree.
+
+    A Node contains a feature and threshold used for splitting,
+    as well as references to its left and right child nodes.
+    It also stores its depth within the tree.
+    """
+    def __init__(self, feature=None, threshold=None, left_child=None,
+                 right_child=None, is_root=False, depth=0):
+        """
+        Initialize a decision tree node.
+
+        Args:
+            feature: The feature index used for splitting at this node.
+            threshold: The threshold value used for splitting.
+            left_child (Node): Left child node.
+            right_child (Node): Right child node.
+            is_root (bool): True if this node is the root of the tree.
+            depth (int): Depth of the node in the tree.
+        """
+        self.feature = feature
+        self.threshold = threshold
+        self.left_child = left_child
+        self.right_child = right_child
+        self.is_leaf = False
+        self.is_root = is_root
+        self.sub_population = None
+        self.depth = depth
+
+    def max_depth_below(self):
+        """
+        Compute the maximum depth reachable below this node.
+
+        This method recursively traverses the subtree rooted at
+        this node and returns the greatest depth value found.
+
+        Returns:
+            int: Maximum depth in the subtree rooted at this node.
+        """
+        if self.left_child is None and self.right_child is None:
+            return self.depth
+        if self.left_child:
+            left_depth = self.left_child.max_depth_below()
+        if self.right_child:
+            right_depth = self.right_child.max_depth_below()
+        return max(left_depth, right_depth)
+
+    def count_nodes_below(self, only_leaves=False):
+        """
+        Count the number of nodes in the subtree rooted at this node.
+
+        If only_leaves is True, only leaf nodes are counted.
+        Otherwise, all nodes in the subtree are counted.
+
+        Args:
+            only_leaves (bool): Whether to count only leaf nodes.
+
+        Returns:
+            int: Number of nodes below this node.
+        """
+        if self.left_child is None and self.right_child is None:
+            return 1
+        total = 0
+        if self.left_child is not None:
+            total += self.left_child.count_nodes_below(only_leaves=only_leaves)
+        if self.right_child is not None:
+            total += self.right_child.count_nodes_below(only_leaves=only_leaves)
+        if not only_leaves:
+            total += 1
+        return total
+
+
+class Leaf(Node):
+    """
+    Represents a leaf node in a decision tree.
+
+    A Leaf stores a prediction value and has no children.
+    """
+    def __init__(self, value, depth=None):
+        """
+        Initialize a leaf node.
+
+        Args:
+            value: The predicted value stored in the leaf.
+            depth (int): Depth of the leaf in the tree.
+        """
+        super().__init__()
+        self.value = value
+        self.is_leaf = True
+        self.depth = depth
+
+    def max_depth_below(self):
+        """
+        Return the depth of the leaf.
+
+        Returns:
+            int: Depth of the leaf node.
+        """
+        return self.depth
+
+    def count_nodes_below(self, only_leaves=False):
+        return 1
+
+
+class Decision_Tree:
+    """
+    Decision tree model.
+
+    This class manages the root node and global tree parameters,
+    and provides utilities such as computing the tree depth.
+    """
+    def __init__(self, max_depth=10, min_pop=1, seed=0,
+                 split_criterion="random", root=None):
+        """
+        Initialize a decision tree.
+
+        Args:
+            max_depth (int): Maximum allowed depth of the tree.
+            min_pop (int): Minimum population required to split a node.
+            seed (int): Random seed for reproducibility.
+            split_criterion (str): Criterion used to split nodes.
+            root (Node): Optional root node for the tree.
+        """
+        self.rng = np.random.default_rng(seed)
+        if root:
+            self.root = root
+        else:
+            self.root = Node(is_root=True)
+        self.explanatory = None
+        self.target = None
+        self.max_depth = max_depth
+        self.min_pop = min_pop
+        self.split_criterion = split_criterion
+        self.predict = None
+
+    def depth(self):
+        """
+        Compute the maximum depth of the decision tree.
+
+        Returns:
+            int: Maximum depth of the tree.
+        """
+        return self.root.max_depth_below()
+
+    def count_nodes(self, only_leaves=False):
+        return self.root.count_nodes_below(only_leaves=only_leaves)
