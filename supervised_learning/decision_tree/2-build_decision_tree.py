@@ -81,59 +81,34 @@ class Node:
             total += 1
         return total
 
+    def left_child_add_prefix(self, text):
+        """Add prefix for left child, avoiding extra blank lines"""
+        lines = [line for line in text.split("\n") if line]
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += "    |  " + x + "\n"
+        return new_text.rstrip("\n")
+
+    def right_child_add_prefix(self, text):
+        """Add prefix for right child, avoiding extra blank lines"""
+        lines = [line for line in text.split("\n") if line]
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += "       " + x + "\n"
+        return new_text.rstrip("\n")
+
     def __str__(self):
-        """
-        Return a formatted string representation of the subtree.
-
-        This method produces a multi-line, human-readable representation
-        of the tree structure starting from this node, using ASCII
-        connectors to visualize parent-child relationships.
-
-        Returns:
-            str: Formatted representation of the subtree.
-        """
-        return "\n".join(self._str_lines()) + "\n"
-
-    def _str_lines(self, prefix=""):
-        """
-        Recursively build the formatted lines of the subtree.
-
-        Each call returns a list of strings representing the subtree
-        rooted at this node. The prefix is used to align children and
-        draw vertical connectors between sibling branches.
-
-        Args:
-            prefix (str): Prefix used to align child nodes visually.
-
-        Returns:
-            list[str]: Lines representing the formatted subtree.
-        """
-        lines = [self._label()]
-        children = []
-        if self.left_child is not None:
-            children.append(self.left_child)
-        if self.right_child is not None:
-            children.append(self.right_child)
-        for i, child in enumerate(children):
-            is_last = (i == len(children) - 1)
-            connector = "+---> "
-            lines.append(prefix + connector + child._label())
-            if isinstance(child, Node) and (child.left_child
-                                            is not None or
-                                            child.right_child is not None):
-                next_prefix = prefix + ("      " if is_last else "|     ")
-                lines.extend(child._str_lines(prefix=next_prefix)[1:])
-        return lines
-
-    def _label(self):
-        """
-        Generate a label for visualization purposes.
-
-        Returns:
-            str: Label string for the node.
-        """
-        name = "root" if self.is_root else "node"
-        return f"{name} [feature={self.feature}, threshold={self.threshold}]"
+        """String representation of the node and its children"""
+        if self.is_root:
+            text = f"root [feature={self.feature}, threshold={self.threshold}]"
+        else:
+            text = "-> node [feature={}, threshold={}]".format(self.feature,
+                                                               self.threshold)
+        if self.left_child:
+            text += "\n" + self.left_child_add_prefix(str(self.left_child))
+        if self.right_child:
+            text += "\n" + self.right_child_add_prefix(str(self.right_child))
+        return text.rstrip("\n") + "\n"
 
 
 class Leaf(Node):
@@ -181,15 +156,6 @@ class Leaf(Node):
         Provide a string representation of the leaf node.
         """
         return (f"-> leaf [value={self.value}]")
-
-    def _label(self):
-        """
-        Return the display label for this leaf.
-
-        Returns:
-            str: A one-line string describing the leaf.
-        """
-        return f"leaf [value={self.value}]"
 
 
 class Decision_Tree:
