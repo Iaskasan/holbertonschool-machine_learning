@@ -214,6 +214,13 @@ class Node:
         )
 
     def pred(self, x):
+        """
+        Predict the output for a single data point x.
+        Args:
+            x (np.ndarray): 1D array representing a single data point.
+        Returns:
+            Predicted value for the data point x.
+        """
         if x[self.feature] > self.threshold:
             return self.left_child.pred(x)
         else:
