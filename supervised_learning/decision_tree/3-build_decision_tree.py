@@ -149,6 +149,7 @@ class Node:
             leaves.extend(self.right_child.get_leaves_below())
         return leaves
 
+
 class Leaf(Node):
     """
     Represents a leaf node in a decision tree.
@@ -205,7 +206,13 @@ class Leaf(Node):
         return f"leaf [value={self.value}]"
 
     def get_leaves_below(self):
+        """
+        Retrieve all leaf nodes in the subtree rooted at this leaf.
+        Returns:
+            list[Leaf]: List of leaf nodes in the subtree.
+        """
         return [self]
+
 
 class Decision_Tree:
     """
@@ -263,7 +270,7 @@ class Decision_Tree:
         """
         return self.root.__str__()
 
-    def get_leaves(self) :
+    def get_leaves(self):
         """
         Retrieve all leaf nodes in the decision tree.
 
