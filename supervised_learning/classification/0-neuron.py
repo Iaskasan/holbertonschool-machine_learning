@@ -18,6 +18,34 @@ class Neuron:
         if nx < 1:
             raise ValueError("nx must be a positive integer")
         self.nx = nx
-        self.W = np.random.normal(size=(1, nx))
-        self.b = 0
-        self.A = 0
+        self.__W = np.random.normal(size=(1, nx))
+        self.__b = 0
+        self.__A = 0
+
+    @property
+    def W(self):
+        """Weights getter
+
+        Returns:
+            numpy.ndarray: weights vector
+        """
+        return self.__W
+    
+    @property
+    def b(self):
+        """Bias getter
+
+        Returns:
+            float: bias value
+        """
+        return self.__b
+    
+    @property
+    def A(self):
+        """Activated output getter
+
+        Returns:
+            float: activated output
+        """
+        return self.__A
+
