@@ -162,7 +162,8 @@ class NeuralNetwork:
         self.__W1 -= alpha * dW1
         self.__b1 -= alpha * db1
 
-    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+    def train(self, X, Y, iterations=5000, alpha=0.05,
+            verbose=True, graph=True, step=100):
         """Trains the neural network
 
         Args:
@@ -175,6 +176,7 @@ class NeuralNetwork:
             numpy.ndarray: neuron predictions
             float: cost of the model
         """
+
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
         if iterations < 1:
@@ -192,10 +194,10 @@ class NeuralNetwork:
         iters = []
 
         for i in range(iterations + 1):
-            A = self.forward_prop(X)
-            cost = self.cost(Y, A)
+            A1, A2 = self.forward_prop(X)
+            cost = self.cost(Y, A2)
 
-            if verbose and i % step == 0 or i == iterations:
+            if verbose and (i % step == 0 or i == iterations):
                 print("Cost after {} iterations: {}".format(i, cost))
 
             if graph and i % step == 0:
@@ -203,7 +205,7 @@ class NeuralNetwork:
                 iters.append(i)
 
             if i < iterations:
-                self.gradient_descent(X, Y, A, alpha)
+                self.gradient_descent(X, Y, A1, A2, alpha)
 
         if graph:
             plt.plot(iters, costs)
