@@ -4,7 +4,7 @@ import numpy as np
 
 
 class DeepNeuralNetwork:
-    """DeeNeuralNetwork class that defines a single
+    """DeepNeuralNetwork class that defines a single
     neuron performing binary classification"""
 
     def __init__(self, nx, layers):
@@ -20,19 +20,17 @@ class DeepNeuralNetwork:
             raise ValueError("nx must be a positive integer")
         if not isinstance(layers, list) or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
-        for elements in layers:
-            if not isinstance(elements, int) or elements < 1:
+        prev = nx
+        self.weights = {} # dictionary to hold all weights and biases of the network
+        for i, nodes in enumerate(layers, start=1):
+            if not isinstance(nodes, int) or nodes < 1:
                 raise TypeError("layers must be a list of positive integers")
+
+            self.weights[f"W{i}"] = np.random.randn(nodes, prev) * np.sqrt(2 / prev)
+            self.weights[f"b{i}"] = np.zeros((nodes, 1))
+
+            prev = nodes
         self.nx = nx
         self.layers = layers
         self.L = len(layers) # number of layers in the neural network
         self.cache = {}      # dictionary to hold all intermediary values of the network
-        self.weights = {}    # dictionary to hold all weights and biases of the network
-        for l in range(self.L):
-            if l == 0:
-                self.weights['W' + str(l + 1)] = np.random.randn(
-                    layers[l], nx) * np.sqrt(2 / nx)
-            else:
-                self.weights['W' + str(l + 1)] = np.random.randn(
-                    layers[l], layers[l - 1]) * np.sqrt(2 / layers[l - 1])
-            self.weights['b' + str(l + 1)] = np.zeros((layers[l], 1))
