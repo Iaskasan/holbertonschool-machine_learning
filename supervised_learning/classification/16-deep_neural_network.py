@@ -21,16 +21,20 @@ class DeepNeuralNetwork:
         if not isinstance(layers, list) or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
         prev = nx
-        self.weights = {} # dictionary to hold all weights and biases of the network
+        # dictionary to hold all weights and biases of the network
+        self.weights = {}
         for i, nodes in enumerate(layers, start=1):
             if not isinstance(nodes, int) or nodes < 1:
                 raise TypeError("layers must be a list of positive integers")
 
-            self.weights[f"W{i}"] = np.random.randn(nodes, prev) * np.sqrt(2 / prev)
+            self.weights[f"W{i}"] = np.random.randn(nodes,
+                                                    prev) * np.sqrt(2 / prev)
             self.weights[f"b{i}"] = np.zeros((nodes, 1))
 
             prev = nodes
         self.nx = nx
         self.layers = layers
-        self.L = len(layers) # number of layers in the neural network
-        self.cache = {}      # dictionary to hold all intermediary values of the network
+        # number of layers in the neural network
+        self.L = len(layers)
+        # dictionary to hold all intermediary values of the network
+        self.cache = {}
