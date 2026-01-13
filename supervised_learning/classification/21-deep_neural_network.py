@@ -126,7 +126,8 @@ class DeepNeuralNetwork:
         Args:
             Y (numpy.ndarray): shape (1, m) that contains the correct
             labels for the input data
-            cache (dict): dictionary containing all intermediary values of the network
+            cache (dict): dictionary containing all
+            intermediary values of the network
             alpha (float): learning rate
         """
         m = Y.shape[1]
@@ -136,6 +137,7 @@ class DeepNeuralNetwork:
             dW = (1 / m) * np.matmul(dZ, A_prev.T)
             db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
             if i > 1:
-                dZ = np.matmul(self.weights[f"W{i}"].T, dZ) * A_prev * (1 - A_prev)
+                dZ = np.matmul(
+                    self.weights[f"W{i}"].T, dZ) * A_prev * (1 - A_prev)
             self.weights[f"W{i}"] -= alpha * dW
             self.weights[f"b{i}"] -= alpha * db
