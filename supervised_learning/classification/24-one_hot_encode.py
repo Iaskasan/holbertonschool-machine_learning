@@ -12,6 +12,8 @@ def one_hot_encode(Y, classes):
         numpy.ndarray: shape (classes, m) containing the one-hot
         encoding of Y
     """
+    if not isinstance(Y, np.ndarray) or len(Y.shape) != 1:
+        return None
     m = Y.shape[0]
     one_hot = np.zeros((classes, m))
     for i in range(m):
