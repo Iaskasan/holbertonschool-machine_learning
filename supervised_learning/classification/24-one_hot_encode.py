@@ -14,6 +14,10 @@ def one_hot_encode(Y, classes):
     """
     if not isinstance(Y, np.ndarray) or len(Y.shape) != 1:
         return None
+    if not isinstance(classes, int) or classes < 2:
+        return None
+    if max(Y) >= classes:
+        return None
     m = Y.shape[0]
     one_hot = np.zeros((classes, m))
     for i in range(m):
