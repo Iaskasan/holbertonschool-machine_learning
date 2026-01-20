@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """calculates the weighted moving average of a data set"""
+import numpy as np
 
 
-def moving_average(data, beta):
-    """calculates moving average of a dataset
+def update_variables_momentum(alpha, beta1, var, grad, v):
+    """updates a variable using the momentum optimization algorithm
     Args:
-        data (list): data to calculate the moving average of
-        beta (float): weight used for the moving average
+        alpha (float): learning rate
+        beta1 (float): momentum weight
+        var (numpy.ndarray): variable to be updated
+        grad (numpy.ndarray): gradient of var
+        v (numpy.ndarray): previous moment of var
     Returns:
-        list: moving averages of data
+        tuple: updated variable and the new moment
     """
-    ema = []
-    ema_val = 0
-    for t, x in enumerate(data):
-        ema_val = beta * ema_val + (1 - beta) * x
-        ema.append(ema_val / (1 - beta**(t+1)))
-    return ema
+    v = beta1 * v + (1 - beta1) * grad
+    var = var - alpha * v
+    return var, v
