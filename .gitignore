@@ -210,3 +210,4 @@ __marimo__/
 main.py
 data/
 *.pkl
+*.h5
