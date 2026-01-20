@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-import numpy as np
 """
 Method for std normalization constants calculation
 """
+import numpy as np
+
 
 
 def normalization_constants(X):
