@@ -5,7 +5,6 @@ Method for std normalization constants calculation
 import numpy as np
 
 
-
 def normalization_constants(X):
     """
     Compute normalization constants for each feature in dataset X.
