@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """calculates the weighted moving average of a data set"""
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 def moving_average(data, beta):
@@ -13,7 +11,8 @@ def moving_average(data, beta):
         list: moving averages of data
     """
     ema = []
-    ema.append(data[0])
-    for i in range(1, len(data)):
-        ema.append(beta * ema[i - 1] + (1 - beta) * data[i])
+    ema_val = 0
+    for t, x in enumerate(data):
+        ema_val = beta * ema_val + (1 - beta) * x
+        ema.append(ema_val / (1 - beta**(t+1)))
     return ema
