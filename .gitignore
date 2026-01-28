@@ -211,3 +211,4 @@ main.py
 data/
 *.pkl
 *.h5
+*.npz
