@@ -14,4 +14,4 @@ def l2_reg_cost(cost, model):
     Returns:
         tensor, total cost including L2 regularization
     """
-    return cost + sum(model.losses)
+    return cost + tf.stack(model.losses)
