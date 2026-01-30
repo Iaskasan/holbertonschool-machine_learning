@@ -19,6 +19,9 @@ def l2_reg_create_layer(prev, n, activation, lambtha):
     Returns:
         tensor, output of the layer
     """
+    if isinstance(prev, int):
+        prev = tf.keras.Input(shape=(prev,))
+
     regularizer = tf.keras.regularizers.L2(lambtha)
     layer = tf.keras.layers.Dense(
         units=n,
