@@ -1,0 +1,2 @@
+timestamp,model,stage,epochs,batch_size,learning_rate,best_val_accuracy,best_val_loss,total_time_sec
+2026-02-20 11:39:51,cifar10_efficientnetv2s_20ep,Stage 1 (Frozen),20,64,0.0001,0.8989,0.2959,0
