@@ -397,7 +397,8 @@ class Yolo:
             label = f"{class_name} {score:.2f}"
 
             # Draw the bounding box
-            cv2.rectangle(image, (x1, y1), (x2, y2), (255, 0, 0), 2, cv2.LINE_AA)
+            cv2.rectangle(image, (x1, y1), (x2, y2), (255, 0, 0),
+                          2, cv2.LINE_AA)
 
             # Put the label above the box
             cv2.putText(image, label, (x1, y1 - 5),
