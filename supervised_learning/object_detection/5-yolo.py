@@ -351,23 +351,29 @@ class Yolo:
         -------
         pimages : numpy.ndarray
             Array of preprocessed images ready for model input.
+            Shape: (ni, input_h, input_w, 3)
         image_shapes : numpy.ndarray
-            Array containing the original shapes of the images.
+            Original image shapes (height, width).
+            Shape: (ni, 2)
         """
         pimages = []
         image_shapes = []
 
+        # Keras model input shape: (None, input_h, input_w, 3)
+        input_h = int(self.model.input.shape[1])
+        input_w = int(self.model.input.shape[2])
+
         for img in images:
-            original_shape = img.shape[:2]  # (height, width)
-            image_shapes.append(original_shape)
+            # Store original (height, width)
+            image_shapes.append(img.shape[:2])
 
-            # Resize to model input size (e.g., 416x416)
-            resized_img = cv2.resize(img, (self.model.input.shape[1],
-                                           self.model.input.shape[2]))
+            # Resize with bicubic interpolation (OpenCV needs (width, height))
+            resized = cv2.resize(img, (input_w, input_h),
+                                 interpolation=cv2.INTER_CUBIC)
 
-            # Normalize pixel values to [0, 1]
-            normalized_img = resized_img / 255.0
+            # Rescale to [0, 1]
+            resized = resized.astype(np.float32) / 255.0
 
-            pimages.append(normalized_img)
+            pimages.append(resized)
 
-        return np.array(pimages), np.array(image_shapes)
+        return np.array(pimages), np.array(image_shapes, dtype=np.int32)
