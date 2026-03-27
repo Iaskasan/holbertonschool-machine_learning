@@ -3,7 +3,6 @@
 import numpy as np
 
 
-
 def definiteness(matrix):
     """Determines the definiteness of a matrix."""
 
