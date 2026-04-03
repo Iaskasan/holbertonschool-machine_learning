@@ -26,7 +26,7 @@ def likelihood(x, n, P):
     if np.any(P < 0) or np.any(P > 1):
         raise ValueError("All values in P must be in the range [0, 1]")
 
-    # Compute binomial coefficient (no math import)
+    # Compute binomial coefficient
     coeff = 1
     for i in range(1, x + 1):
         coeff *= (n - x + i) / i
