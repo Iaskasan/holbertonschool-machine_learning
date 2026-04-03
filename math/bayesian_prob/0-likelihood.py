@@ -28,10 +28,8 @@ def likelihood(x, n, P):
         raise ValueError("All values in P must be in the range [0, 1]")
 
     # Compute binomial coefficient
-    from math import comb
-    coeff = comb(n, x)
+    coeff = (np.math.factorial(n) /
+             (np.math.factorial(x) * np.math.factorial(n - x)))
 
     # Compute likelihood
-    likelihoods = coeff * (P ** x) * ((1 - P) ** (n - x))
-
-    return likelihoods
+    return coeff * (P ** x) * ((1 - P) ** (n - x))
