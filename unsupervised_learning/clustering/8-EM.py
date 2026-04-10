@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Performs the expectation maximization for a GMM."""
 import numpy as np
 
 initialize = __import__('4-initialize').initialize
