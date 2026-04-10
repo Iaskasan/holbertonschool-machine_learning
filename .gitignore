@@ -212,3 +212,4 @@ data/
 *.pkl
 *.h5
 *.npz
+.codex
