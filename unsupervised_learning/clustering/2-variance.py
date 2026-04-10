@@ -19,7 +19,7 @@ def variance(X, C):
             X.shape[1] != C.shape[1]):
         return None
 
-    # Compute squared distances (no need for sqrt!)
+    # Compute squared distances
     distances = np.sum((X[:, np.newaxis, :] - C) ** 2, axis=2)
 
     # Minimum squared distance for each point
