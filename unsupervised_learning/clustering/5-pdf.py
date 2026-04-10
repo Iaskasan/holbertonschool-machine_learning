@@ -18,7 +18,7 @@ def pdf(X, m, S):
     """
     if (not isinstance(X, np.ndarray) or X.ndim != 2 or
         not isinstance(m, np.ndarray) or m.ndim != 1 or
-        not isinstance(S, np.ndarray) or S.ndim != 2):
+            not isinstance(S, np.ndarray) or S.ndim != 2):
         return None
 
     n, d = X.shape
