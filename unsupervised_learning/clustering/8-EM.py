@@ -41,7 +41,7 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
         if should_print:
             print("Log Likelihood after {} iterations: {:.5f}".format(i, log))
 
-        if prev_l is not None and abs(l - prev_l) <= tol:
+        if prev_l is not None and abs(log - prev_l) <= tol:
             return pi, m, S, g, log
 
         if i == iterations:
