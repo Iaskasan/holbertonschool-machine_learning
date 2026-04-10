@@ -9,21 +9,21 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
     """Finds the best number of clusters for a GMM using BIC."""
     if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None, None, None, None
-    if not isinstance(kmin, int) or kmin <= 0:
+    if type(kmin) is not int or kmin <= 0:
         return None, None, None, None
     if kmax is None:
         kmax = X.shape[0]
-    if not isinstance(kmax, int) or kmax <= 0:
+    if type(kmax) is not int or kmax <= 0:
         return None, None, None, None
     if kmin > kmax:
         return None, None, None, None
     if kmax > X.shape[0]:
         return None, None, None, None
-    if not isinstance(iterations, int) or iterations <= 0:
+    if type(iterations) is not int or iterations <= 0:
         return None, None, None, None
-    if not isinstance(tol, (int, float)) or tol < 0:
+    if isinstance(tol, bool) or not isinstance(tol, (int, float)) or tol < 0:
         return None, None, None, None
-    if not isinstance(verbose, bool):
+    if type(verbose) is not bool:
         return None, None, None, None
 
     n, d = X.shape

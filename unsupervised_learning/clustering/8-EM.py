@@ -11,13 +11,13 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     """Performs the expectation maximization for a GMM."""
     if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None, None, None, None, None
-    if not isinstance(k, int) or k <= 0 or k > X.shape[0]:
+    if type(k) is not int or k <= 0 or k > X.shape[0]:
         return None, None, None, None, None
-    if not isinstance(iterations, int) or iterations <= 0:
+    if type(iterations) is not int or iterations <= 0:
         return None, None, None, None, None
-    if not isinstance(tol, (int, float)) or tol < 0:
+    if isinstance(tol, bool) or not isinstance(tol, (int, float)) or tol < 0:
         return None, None, None, None, None
-    if not isinstance(verbose, bool):
+    if type(verbose) is not bool:
         return None, None, None, None, None
 
     tol = float(tol)
