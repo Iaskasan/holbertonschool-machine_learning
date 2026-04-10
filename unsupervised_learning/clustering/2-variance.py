@@ -22,7 +22,7 @@ def variance(X, C):
     # Compute squared distances
     distances = np.sum((X[:, np.newaxis, :] - C) ** 2, axis=2)
 
-    # Minimum squared distance for each point
+    # Minimum squared distance each point
     min_dist = np.min(distances, axis=1)
 
     # Total variance
