@@ -54,9 +54,10 @@ class BayesianOptimization():
         nonzero_sigma = sigma > 0
         Z[nonzero_sigma] = imp[nonzero_sigma] / sigma[nonzero_sigma]
         EI = np.zeros_like(mu)
-        EI[nonzero_sigma] = (imp[nonzero_sigma] * norm.cdf(Z[nonzero_sigma]) +
-                             sigma[nonzero_sigma] *
-                             norm.pdf(Z[nonzero_sigma]))
+        EI[nonzero_sigma] = (
+            imp[nonzero_sigma] * norm.cdf(
+                Z[nonzero_sigma]) + sigma[nonzero_sigma] * norm.pdf(
+                    Z[nonzero_sigma]))
         X_next = self.X_s[np.argmax(EI)]
         return X_next.reshape(1,), EI
 
