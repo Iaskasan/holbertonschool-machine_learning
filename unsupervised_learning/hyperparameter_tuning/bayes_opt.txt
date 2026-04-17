@@ -1,0 +1,268 @@
+Bayesian Optimization Report
+============================
+Dataset: Fashion MNIST
+Model: Dense neural network
+Single metric optimized: validation accuracy
+Total evaluations: 30
+Maximum allowed evaluations: 30
+
+Best Result
+-----------
+Best objective (1 - val_accuracy): 0.126000
+Best validation accuracy: 0.874000
+Best epoch: 19
+Checkpoint: /home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_27_lr_7p34em04_u1_256_u2_128_d1_2p91em01_d2_3p00em01_l2_3p99em05_bs_128.keras
+Optimizer x_opt: [ -3.13438924 256.         128.           0.29102007   0.29985966
+  -4.39883345 128.        ]
+Optimizer fx_opt: 0.12599998712539673
+Best hyperparameters:
+  learning_rate: 0.0007338558534121832
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.2910200729652601
+  dropout_2: 0.2998596598349527
+  l2_weight: 3.9917795701844316e-05
+  batch_size: 128
+
+Trial History
+-------------
+Iteration 01: objective=0.154000, val_accuracy=0.846000, best_epoch=20, epochs_ran=20, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_01_lr_1p30em04_u1_64_u2_128_d1_1p96em01_d2_4p79em01_l2_3p64em05_bs_64.keras
+  learning_rate: 0.00012984521643751772
+  units_1: 64
+  units_2: 128
+  dropout_1: 0.19639239805041486
+  dropout_2: 0.4785775794765232
+  l2_weight: 3.642775765463243e-05
+  batch_size: 64
+Iteration 02: objective=0.139000, val_accuracy=0.861000, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_02_lr_3p51em04_u1_256_u2_128_d1_4p18em01_d2_7p02em02_l2_1p09em04_bs_128.keras
+  learning_rate: 0.0003510044230998052
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.41803938176868877
+  dropout_2: 0.07017539020632257
+  l2_weight: 0.00010880242882938454
+  batch_size: 128
+Iteration 03: objective=0.135500, val_accuracy=0.864500, best_epoch=11, epochs_ran=14, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_03_lr_9p02em04_u1_128_u2_128_d1_1p69em01_d2_4p35em01_l2_1p45em04_bs_32.keras
+  learning_rate: 0.000902256947026915
+  units_1: 128
+  units_2: 128
+  dropout_1: 0.1686980802086342
+  dropout_2: 0.4350436291792182
+  l2_weight: 0.00014517704896094836
+  batch_size: 32
+Iteration 04: objective=0.151500, val_accuracy=0.848500, best_epoch=6, epochs_ran=9, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_04_lr_4p21em03_u1_64_u2_64_d1_3p24em01_d2_2p37em01_l2_5p57em05_bs_256.keras
+  learning_rate: 0.004210536704211815
+  units_1: 64
+  units_2: 64
+  dropout_1: 0.3240859360255986
+  dropout_2: 0.23680402263685524
+  l2_weight: 5.5726193191290413e-05
+  batch_size: 256
+Iteration 05: objective=0.128500, val_accuracy=0.871500, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_05_lr_9p12em04_u1_256_u2_128_d1_1p84em01_d2_4p00em01_l2_4p09em05_bs_128.keras
+  learning_rate: 0.0009119149691664945
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.18412076992027399
+  dropout_2: 0.4004553759898221
+  l2_weight: 4.093734644841746e-05
+  batch_size: 128
+Iteration 06: objective=0.128000, val_accuracy=0.872000, best_epoch=11, epochs_ran=14, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_06_lr_1p51em03_u1_256_u2_128_d1_6p07em02_d2_5p00em01_l2_2p44em05_bs_128.keras
+  learning_rate: 0.0015093411452749342
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.06066384190478357
+  dropout_2: 0.5
+  l2_weight: 2.4438090521075548e-05
+  batch_size: 128
+Iteration 07: objective=0.151000, val_accuracy=0.849000, best_epoch=5, epochs_ran=8, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_07_lr_4p51em03_u1_256_u2_128_d1_2p73em01_d2_5p00em01_l2_7p07em05_bs_128.keras
+  learning_rate: 0.004506224826143464
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.27286801083466916
+  dropout_2: 0.5
+  l2_weight: 7.0712416698307e-05
+  batch_size: 128
+Iteration 08: objective=0.131500, val_accuracy=0.868500, best_epoch=12, epochs_ran=15, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_08_lr_9p05em04_u1_256_u2_128_d1_7p16em02_d2_4p49em01_l2_2p45em05_bs_128.keras
+  learning_rate: 0.0009054961492912991
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.0716129630024723
+  dropout_2: 0.4488329649770239
+  l2_weight: 2.4534786517529005e-05
+  batch_size: 128
+Iteration 09: objective=0.132500, val_accuracy=0.867500, best_epoch=8, epochs_ran=11, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_09_lr_1p27em03_u1_256_u2_128_d1_1p26em02_d2_5p00em01_l2_3p96em05_bs_128.keras
+  learning_rate: 0.001268712262567389
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.012629780748254195
+  dropout_2: 0.5
+  l2_weight: 3.958571398390016e-05
+  batch_size: 128
+Iteration 10: objective=0.131000, val_accuracy=0.869000, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_10_lr_1p33em03_u1_256_u2_128_d1_2p95em01_d2_4p04em01_l2_2p52em05_bs_128.keras
+  learning_rate: 0.0013334765607793553
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.29524877716982817
+  dropout_2: 0.40404443424900877
+  l2_weight: 2.5232757928687363e-05
+  batch_size: 128
+Iteration 11: objective=0.130500, val_accuracy=0.869500, best_epoch=11, epochs_ran=14, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_11_lr_1p91em03_u1_256_u2_128_d1_0p00e00_d2_5p00em01_l2_1p21em05_bs_128.keras
+  learning_rate: 0.0019071925544328742
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.0
+  dropout_2: 0.5
+  l2_weight: 1.2054704027510669e-05
+  batch_size: 128
+Iteration 12: objective=0.131000, val_accuracy=0.869000, best_epoch=8, epochs_ran=11, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_12_lr_1p31em03_u1_256_u2_128_d1_0p00e00_d2_5p02em02_l2_1p94em05_bs_128.keras
+  learning_rate: 0.0013104416703900933
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.0
+  dropout_2: 0.050150532696287956
+  l2_weight: 1.9357544637287955e-05
+  batch_size: 128
+Iteration 13: objective=0.140000, val_accuracy=0.860000, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_13_lr_6p53em04_u1_256_u2_128_d1_4p89em01_d2_5p00em01_l2_5p53em06_bs_128.keras
+  learning_rate: 0.000652909142317496
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.48898903824612816
+  dropout_2: 0.5
+  l2_weight: 5.533615207922394e-06
+  batch_size: 128
+Iteration 14: objective=0.155500, val_accuracy=0.844500, best_epoch=6, epochs_ran=9, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_14_lr_6p83em03_u1_128_u2_128_d1_1p87em01_d2_3p03em01_l2_2p25em05_bs_32.keras
+  learning_rate: 0.006825998773699159
+  units_1: 128
+  units_2: 128
+  dropout_1: 0.18677885518065787
+  dropout_2: 0.3029356609939951
+  l2_weight: 2.2544604356296015e-05
+  batch_size: 32
+Iteration 15: objective=0.142500, val_accuracy=0.857500, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_15_lr_2p04em04_u1_128_u2_128_d1_1p55em01_d2_5p00em01_l2_5p71em04_bs_32.keras
+  learning_rate: 0.0002039057124650754
+  units_1: 128
+  units_2: 128
+  dropout_1: 0.15540843703102267
+  dropout_2: 0.5
+  l2_weight: 0.0005706430605274059
+  batch_size: 32
+Iteration 16: objective=0.135000, val_accuracy=0.865000, best_epoch=6, epochs_ran=9, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_16_lr_3p34em03_u1_256_u2_128_d1_0p00e00_d2_2p30em02_l2_7p49em06_bs_128.keras
+  learning_rate: 0.0033430144307896458
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.0
+  dropout_2: 0.02297371186800914
+  l2_weight: 7.486874733794438e-06
+  batch_size: 128
+Iteration 17: objective=0.149000, val_accuracy=0.851000, best_epoch=11, epochs_ran=14, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_17_lr_7p28em04_u1_64_u2_128_d1_3p61em01_d2_4p70em01_l2_2p86em06_bs_256.keras
+  learning_rate: 0.000727882236379214
+  units_1: 64
+  units_2: 128
+  dropout_1: 0.3612873780950781
+  dropout_2: 0.4704206270139114
+  l2_weight: 2.8590304579745596e-06
+  batch_size: 256
+Iteration 18: objective=0.129000, val_accuracy=0.871000, best_epoch=11, epochs_ran=14, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_18_lr_1p49em03_u1_256_u2_128_d1_1p01em02_d2_3p59em01_l2_2p02em05_bs_128.keras
+  learning_rate: 0.0014947170703394016
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.01010817847832832
+  dropout_2: 0.3590189028384695
+  l2_weight: 2.022019865390197e-05
+  batch_size: 128
+Iteration 19: objective=0.133500, val_accuracy=0.866500, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_19_lr_1p73em04_u1_256_u2_96_d1_2p45em01_d2_9p61em02_l2_9p75em06_bs_32.keras
+  learning_rate: 0.0001732498568388777
+  units_1: 256
+  units_2: 96
+  dropout_1: 0.24494064874546995
+  dropout_2: 0.09610103566181383
+  l2_weight: 9.752886601214087e-06
+  batch_size: 32
+Iteration 20: objective=0.143000, val_accuracy=0.857000, best_epoch=6, epochs_ran=9, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_20_lr_1p01em03_u1_256_u2_96_d1_1p89em01_d2_3p37em01_l2_1p41em05_bs_32.keras
+  learning_rate: 0.0010068037721507636
+  units_1: 256
+  units_2: 96
+  dropout_1: 0.18923326016141245
+  dropout_2: 0.3369249255359649
+  l2_weight: 1.4069716371770008e-05
+  batch_size: 32
+Iteration 21: objective=0.143000, val_accuracy=0.857000, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_21_lr_1p00em04_u1_256_u2_96_d1_4p51em01_d2_0p00e00_l2_2p51em06_bs_32.keras
+  learning_rate: 0.0001
+  units_1: 256
+  units_2: 96
+  dropout_1: 0.4514573058858413
+  dropout_2: 0.0
+  l2_weight: 2.506718829675217e-06
+  batch_size: 32
+Iteration 22: objective=0.134000, val_accuracy=0.866000, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_22_lr_1p00em04_u1_256_u2_96_d1_7p21em02_d2_0p00e00_l2_3p04em05_bs_32.keras
+  learning_rate: 0.0001
+  units_1: 256
+  units_2: 96
+  dropout_1: 0.07208099674334965
+  dropout_2: 0.0
+  l2_weight: 3.040932410458775e-05
+  batch_size: 32
+Iteration 23: objective=0.129000, val_accuracy=0.871000, best_epoch=10, epochs_ran=13, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_23_lr_9p23em04_u1_256_u2_128_d1_1p62em01_d2_1p82em01_l2_3p63em05_bs_128.keras
+  learning_rate: 0.0009229827599836245
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.16178453091700257
+  dropout_2: 0.18215121849159055
+  l2_weight: 3.6324727290442294e-05
+  batch_size: 128
+Iteration 24: objective=0.141000, val_accuracy=0.859000, best_epoch=20, epochs_ran=20, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_24_lr_1p41em04_u1_256_u2_96_d1_2p21em01_d2_2p84em01_l2_7p42em05_bs_256.keras
+  learning_rate: 0.0001413256771482815
+  units_1: 256
+  units_2: 96
+  dropout_1: 0.220610990548884
+  dropout_2: 0.2839042685845048
+  l2_weight: 7.421223784029264e-05
+  batch_size: 256
+Iteration 25: objective=0.144000, val_accuracy=0.856000, best_epoch=18, epochs_ran=20, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_25_lr_1p00em04_u1_256_u2_96_d1_5p00em01_d2_5p00em01_l2_2p57em05_bs_32.keras
+  learning_rate: 0.0001
+  units_1: 256
+  units_2: 96
+  dropout_1: 0.5
+  dropout_2: 0.5
+  l2_weight: 2.569495729359043e-05
+  batch_size: 32
+Iteration 26: objective=0.140000, val_accuracy=0.860000, best_epoch=18, epochs_ran=20, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_26_lr_4p32em04_u1_256_u2_64_d1_4p57em01_d2_3p61em01_l2_3p01em05_bs_256.keras
+  learning_rate: 0.0004315240492852607
+  units_1: 256
+  units_2: 64
+  dropout_1: 0.4566124482279595
+  dropout_2: 0.36079241703435805
+  l2_weight: 3.0146932647663338e-05
+  batch_size: 256
+Iteration 27: objective=0.126000, val_accuracy=0.874000, best_epoch=19, epochs_ran=20, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_27_lr_7p34em04_u1_256_u2_128_d1_2p91em01_d2_3p00em01_l2_3p99em05_bs_128.keras
+  learning_rate: 0.0007338558534121832
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.2910200729652601
+  dropout_2: 0.2998596598349527
+  l2_weight: 3.9917795701844316e-05
+  batch_size: 128
+Iteration 28: objective=0.134500, val_accuracy=0.865500, best_epoch=11, epochs_ran=14, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_28_lr_9p12em04_u1_128_u2_96_d1_4p79em01_d2_3p87em01_l2_3p24em06_bs_64.keras
+  learning_rate: 0.0009123923789416874
+  units_1: 128
+  units_2: 96
+  dropout_1: 0.4789875033951723
+  dropout_2: 0.3874733801283898
+  l2_weight: 3.2420376557081847e-06
+  batch_size: 64
+Iteration 29: objective=0.130000, val_accuracy=0.870000, best_epoch=14, epochs_ran=17, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_29_lr_5p58em04_u1_256_u2_128_d1_4p32em01_d2_4p40em01_l2_4p36em05_bs_128.keras
+  learning_rate: 0.0005575358151351644
+  units_1: 256
+  units_2: 128
+  dropout_1: 0.4318746742892001
+  dropout_2: 0.4396730175647754
+  l2_weight: 4.363262680170113e-05
+  batch_size: 128
+Iteration 30: objective=0.174500, val_accuracy=0.825500, best_epoch=5, epochs_ran=8, checkpoint=/home/iaskasan/holbertonschool-machine_learning-5/unsupervised_learning/hyperparameter_tuning/bayes_opt_checkpoints/trial_30_lr_5p38em03_u1_128_u2_96_d1_4p43em01_d2_3p59em01_l2_3p61em06_bs_64.keras
+  learning_rate: 0.005378502403833788
+  units_1: 128
+  units_2: 96
+  dropout_1: 0.442624124435526
+  dropout_2: 0.35870148491265674
+  l2_weight: 3.609668655696899e-06
+  batch_size: 64
