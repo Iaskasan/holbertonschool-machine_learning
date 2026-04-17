@@ -49,8 +49,14 @@ class BayesianOptimization():
         else:
             Y_opt = np.max(self.gp.Y)
             imp = mu - Y_opt - self.xsi
-        Z = imp / sigma
-        EI = imp * norm.cdf(Z) + sigma * norm.pdf(Z)
+
+        Z = np.zeros_like(mu)
+        nonzero_sigma = sigma > 0
+        Z[nonzero_sigma] = imp[nonzero_sigma] / sigma[nonzero_sigma]
+        EI = np.zeros_like(mu)
+        EI[nonzero_sigma] = (imp[nonzero_sigma] * norm.cdf(Z[nonzero_sigma])
+                             + sigma[nonzero_sigma] *
+                             norm.pdf(Z[nonzero_sigma]))
         X_next = self.X_s[np.argmax(EI)]
         return X_next.reshape(1,), EI
 
@@ -68,7 +74,7 @@ class BayesianOptimization():
         """
         for i in range(iterations):
             X_next, EI = self.acquisition()
-            if EI == 0:
+            if np.any(np.isclose(self.gp.X.reshape(-1), X_next[0])):
                 break
             Y_next = self.f(X_next)
             self.gp.update(X_next, Y_next)
