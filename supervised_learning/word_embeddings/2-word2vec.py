@@ -23,23 +23,17 @@ def word2vec_model(sentences, vector_size=100, min_count=5, window=5,
     Returns:
         A trained Word2Vec model
     """
-    training_data = [
-        sentence.split() if isinstance(sentence, str) else sentence
-        for sentence in sentences
-    ]
 
     model = gensim.models.Word2Vec(
+        sentences,
         vector_size=vector_size,
         min_count=min_count,
         window=window,
         negative=negative,
         sg=0 if cbow else 1,
+        epochs=epochs,
         seed=seed,
         workers=workers
     )
-
-    model.build_vocab(training_data)
-    model.train(training_data, total_examples=model.corpus_count,
-                epochs=epochs)
 
     return model
