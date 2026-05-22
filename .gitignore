@@ -213,3 +213,6 @@ data/
 *.h5
 *.npz
 .codex
+*.csv
+bitstamp.csv
+coinbase.csv
