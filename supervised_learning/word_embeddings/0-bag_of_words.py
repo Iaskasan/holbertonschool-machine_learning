@@ -33,7 +33,7 @@ def bag_of_words(sentences, vocab=None):
             for word in sentence
         ))
     else:
-        features = sorted(vocab)
+        features = vocab
 
     features = np.array(features)
 
