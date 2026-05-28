@@ -12,6 +12,8 @@ class RNNDecoder(tf.keras.layers.Layer):
     def __init__(self, vocab, embedding, units, batch):
         """Set up the decoder layers."""
         super().__init__()
+        self.batch = batch
+        self.units = units
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
         self.gru = tf.keras.layers.GRU(
             units,
@@ -25,6 +27,7 @@ class RNNDecoder(tf.keras.layers.Layer):
     def call(self, x, s_prev, hidden_states):
         """Decode one token step from the previous state and encoder states."""
         context, _ = self.attention(s_prev, hidden_states)
+        x = tf.reshape(x, (-1, 1))
         x = self.embedding(x)
         context = tf.expand_dims(context, 1)
         x = tf.concat([context, x], axis=-1)
