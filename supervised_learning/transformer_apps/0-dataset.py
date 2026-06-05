@@ -5,64 +5,42 @@ import tensorflow_datasets as tfds
 import transformers
 
 
-class _LazyTokenizer:
-    """Tokenizer proxy that loads the real tokenizer on first use."""
-
-    def __init__(self, dataset, lang_index, model_name):
-        """Store the data source and pretrained model name."""
-        self._dataset = dataset
-        self._lang_index = lang_index
-        self._model_name = model_name
-        self._tokenizer = None
-
-    def _iterator(self, batch_size=1024):
-        """Yield decoded text batches for tokenizer training."""
-        for batch in self._dataset.batch(batch_size):
-            texts = batch[self._lang_index].numpy()
-            yield [text.decode("utf-8") for text in texts]
-
-    def _load(self):
-        """Instantiate and train the tokenizer once."""
-        if self._tokenizer is None:
-            tokenizer = transformers.AutoTokenizer.from_pretrained(
-                self._model_name,
-                use_fast=True
-            )
-            self._tokenizer = tokenizer.train_new_from_iterator(
-                self._iterator(),
-                vocab_size=2 ** 13
-            )
-        return self._tokenizer
-
-    def __call__(self, *args, **kwargs):
-        """Proxy direct tokenizer calls."""
-        return self._load()(*args, **kwargs)
-
-    def __getattr__(self, name):
-        """Proxy attribute access to the underlying tokenizer."""
-        return getattr(self._load(), name)
-
-
 class Dataset:
     """Load the translation dataset and prepare tokenizers."""
 
     def __init__(self):
-        """Load dataset splits and set up tokenizer attributes."""
+        """Load dataset splits and initialize tokenizer storage."""
         self.data_train, self.data_valid = tfds.load(
             "ted_hrlr_translate/pt_to_en",
             split=["train", "validation"],
             as_supervised=True
         )
-        self.tokenizer_pt = _LazyTokenizer(
-            self.data_train,
-            0,
-            "neuralmind/bert-base-portuguese-cased"
-        )
-        self.tokenizer_en = _LazyTokenizer(
-            self.data_train,
-            1,
-            "bert-base-uncased"
-        )
+        self._tokenizer_pt = None
+        self._tokenizer_en = None
+
+    @property
+    def tokenizer_pt(self):
+        """Return the Portuguese tokenizer, building it on first access."""
+        if self._tokenizer_pt is None:
+            self.tokenize_dataset(self.data_train)
+        return self._tokenizer_pt
+
+    @tokenizer_pt.setter
+    def tokenizer_pt(self, value):
+        """Store the Portuguese tokenizer."""
+        self._tokenizer_pt = value
+
+    @property
+    def tokenizer_en(self):
+        """Return the English tokenizer, building it on first access."""
+        if self._tokenizer_en is None:
+            self.tokenize_dataset(self.data_train)
+        return self._tokenizer_en
+
+    @tokenizer_en.setter
+    def tokenizer_en(self, value):
+        """Store the English tokenizer."""
+        self._tokenizer_en = value
 
     def tokenize_dataset(self, data):
         """Create Portuguese and English sub-word tokenizers."""
