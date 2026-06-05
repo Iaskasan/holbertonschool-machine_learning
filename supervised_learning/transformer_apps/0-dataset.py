@@ -10,7 +10,7 @@ class Dataset:
     """Load the translation dataset and prepare tokenizers."""
 
     def __init__(self):
-        """Load dataset splits and build tokenizers from the train split."""
+        """Load dataset splits and build tokenizers fromm the train split."""
         self.data_train, self.data_valid = tfds.load(
             "ted_hrlr_translate/pt_to_en",
             split=["train", "validation"],
