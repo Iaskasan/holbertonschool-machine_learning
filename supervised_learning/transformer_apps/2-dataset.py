@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Dataset loader with TensorFlow encoding helpers."""
 
+import tensorflow as tf
 import tensorflow_datasets as tfds
 import transformers
 
@@ -78,7 +79,6 @@ class Dataset:
 
     def tf_encode(self, pt, en):
         """TensorFlow wrapper around encode."""
-        tf = tfds.core.utils.tf_utils.tf
         pt_tokens, en_tokens = tf.py_function(
             self.encode,
             [pt, en],
