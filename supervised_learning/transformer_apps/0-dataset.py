@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Dataset loader and tokenizer preparation for translation."""
 
-import tensorflow as tf
 import tensorflow_datasets as tfds
 import transformers
 
@@ -36,18 +35,13 @@ class Dataset:
                 texts = batch[lang_index].numpy()
                 yield [text.decode("utf-8") for text in texts]
 
-        cardinality = tf.data.experimental.cardinality(data).numpy()
-        length = None if cardinality < 0 else int(cardinality)
-
         tokenizer_pt = tokenizer_pt.train_new_from_iterator(
             iterator(0),
-            vocab_size=2 ** 13,
-            length=length
+            vocab_size=2 ** 13
         )
         tokenizer_en = tokenizer_en.train_new_from_iterator(
             iterator(1),
-            vocab_size=2 ** 13,
-            length=length
+            vocab_size=2 ** 13
         )
 
         return tokenizer_pt, tokenizer_en
