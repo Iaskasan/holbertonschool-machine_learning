@@ -9,38 +9,20 @@ class Dataset:
     """Load the translation dataset and prepare tokenizers."""
 
     def __init__(self):
-        """Load dataset splits and initialize tokenizer storage."""
-        self.data_train, self.data_valid = tfds.load(
+        """Load dataset splits and build tokenizers fromm the train split."""
+        self.data_train = tfds.load(
             "ted_hrlr_translate/pt_to_en",
-            split=["train", "validation"],
+            split="train",
             as_supervised=True
         )
-        self._tokenizer_pt = None
-        self._tokenizer_en = None
-
-    @property
-    def tokenizer_pt(self):
-        """Return the Portuguese tokenizer, building it on first access."""
-        if self._tokenizer_pt is None:
-            self.tokenize_dataset(self.data_train)
-        return self._tokenizer_pt
-
-    @tokenizer_pt.setter
-    def tokenizer_pt(self, value):
-        """Store the Portuguese tokenizer."""
-        self._tokenizer_pt = value
-
-    @property
-    def tokenizer_en(self):
-        """Return the English tokenizer, building it on first access."""
-        if self._tokenizer_en is None:
-            self.tokenize_dataset(self.data_train)
-        return self._tokenizer_en
-
-    @tokenizer_en.setter
-    def tokenizer_en(self, value):
-        """Store the English tokenizer."""
-        self._tokenizer_en = value
+        self.data_valid = tfds.load(
+            "ted_hrlr_translate/pt_to_en",
+            split="validation",
+            as_supervised=True
+        )
+        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
+            self.data_train
+        )
 
     def tokenize_dataset(self, data):
         """Create Portuguese and English sub-word tokenizers."""
@@ -67,6 +49,4 @@ class Dataset:
             vocab_size=2 ** 13
         )
 
-        self.tokenizer_pt = tokenizer_pt
-        self.tokenizer_en = tokenizer_en
         return tokenizer_pt, tokenizer_en
