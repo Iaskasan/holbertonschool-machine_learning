@@ -13,12 +13,14 @@ class Dataset:
         self.data_train = tfds.load(
             "ted_hrlr_translate/pt_to_en",
             split="train",
-            as_supervised=True
+            as_supervised=True,
+            try_gcs=True
         )
         self.data_valid = tfds.load(
             "ted_hrlr_translate/pt_to_en",
             split="validation",
-            as_supervised=True
+            as_supervised=True,
+            try_gcs=True
         )
         self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
             self.data_train
