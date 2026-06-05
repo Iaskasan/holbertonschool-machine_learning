@@ -3,7 +3,7 @@
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-from transformers import AutoTokenizer
+import transformers
 
 
 class Dataset:
@@ -22,11 +22,11 @@ class Dataset:
 
     def tokenize_dataset(self, data):
         """Create Portuguese and English sub-word tokenizers."""
-        tokenizer_pt = AutoTokenizer.from_pretrained(
+        tokenizer_pt = transformers.AutoTokenizer.from_pretrained(
             "neuralmind/bert-base-portuguese-cased",
             use_fast=True
         )
-        tokenizer_en = AutoTokenizer.from_pretrained(
+        tokenizer_en = transformers.AutoTokenizer.from_pretrained(
             "bert-base-uncased",
             use_fast=True
         )
