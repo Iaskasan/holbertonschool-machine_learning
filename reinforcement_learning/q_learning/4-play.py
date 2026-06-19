@@ -11,7 +11,6 @@ def play(env, Q, max_steps=100):
 
     render = env.render()
     renders.append(render)
-    print(render, end="")
 
     for _ in range(max_steps):
         action = Q[state].argmax()
@@ -20,7 +19,6 @@ def play(env, Q, max_steps=100):
 
         render = env.render()
         renders.append(render)
-        print(render, end="")
 
         if terminated or truncated:
             break
