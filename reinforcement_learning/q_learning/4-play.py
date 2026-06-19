@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Play an episode using a trained Q-table."""
+import numpy as np
 
 
 def play(env, Q, max_steps=100):
