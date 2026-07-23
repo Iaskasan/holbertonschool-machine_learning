@@ -30,7 +30,7 @@ def visualize(df):
         "Volume_(BTC)": "sum",
         "Volume_(Currency)": "sum",
     })
-
+    print(df)
     df.plot()
     plt.show()
     return df
