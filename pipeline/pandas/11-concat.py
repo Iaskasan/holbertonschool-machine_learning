@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Concatenates timestamp-indexed cryptocurrency data."""
-index = __import__('10-index').index
+
 import pandas as pd
+index = __import__('10-index').index
 
 
 def concat(df1, df2):
